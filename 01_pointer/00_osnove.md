@@ -15,17 +15,17 @@ Na koncu sprosti prostor v pomnilniku z funkcijo free.
 Definiraj spremenljivko a kot spisek predefiniranih številk.
 Izpiši...
 * a, &a[0]
-* a[0], *(a+0)
-* a[1], *(a+1)
-* a[2], *(a+2)
+* &a[0] -> a[0], a+0 -> *(a+0)
+* &a[1] -> a[1], a+1 -> *(a+1)
+* &a[2] -> a[2], a+2 -> *(a+2)
 
 ## POINTER JE SPISEK
 Definiraj pointer a z mallocom in vnesi v rezerviran prostor predefinirane številke.
 Izpiši...
 * a, &a[0]
-* a[0], *(a+0)
-* a[1], *(a+1)
-* a[2], *(a+2)
+* &a[0] -> a[0], a+0 -> *(a+0)
+* &a[1] -> a[1], a+1 -> *(a+1)
+* &a[2] -> a[2], a+2 -> *(a+2)
 
 ## Izpiši območje v pomnilniku
 Definiraj 5 spremenljivk z specifičnimi vrednostmi.

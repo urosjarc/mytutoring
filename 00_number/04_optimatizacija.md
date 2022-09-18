@@ -1,3 +1,6 @@
+## Ničla linearne funkcije
+Brez izpeljave poišči ničlo linearne funkcije katere parametre vnese uporabnik.
+
 ## Ničla funkcije
 Poišči ničlo funkcije x+cos(x) v območju x = [-1, 1]
 

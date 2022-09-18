@@ -40,3 +40,6 @@ Izpiši ali je leto prestopno.
 ## Logična tabela
 Uporabnik vnese svoje informacije.
 Izpiši v katero kategorijo cloveka spada na podlagi logične tabele.
+
+## Avanturistično igro
+Ustvari avanturistično igro na podlagi podanega odločitvenega drevesa.
