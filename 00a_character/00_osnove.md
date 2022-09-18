@@ -7,11 +7,7 @@ Uporabnik vnese številko.
 Izpiši znak ki je zapisan pod izbrano številko.
 
 ## Ascii tabela
-Izpiši celotno ascii tabelo.
-
-## Preveri številko
-Uporabnik vnese črko.
-Preveri ali črka predstavlja številko.
+Izpiši celotno ascii tabelo. Probaj najti smejkota :)
 
 ## Preveri soglasnik
 Uporabnik vnese črko.
