@@ -1,3 +1,7 @@
+# Nahajanje v besedi
+Uporabnik vnese besedo.
+Izpiši ali se presledek nahaja v besedi.
+
 # Število črk
 Uporabnik vnese besedo.
 Izpiši število črk v besedi.

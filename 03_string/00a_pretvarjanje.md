@@ -1,9 +1,18 @@
-# Tip
+# V Tip
 Uporabnik vnese besedo
 Izpiši ali se v besedi nahaja...
 * int
 * float
 * boolean
+Pretvori besedo v pravo obliko.
+ 
+# V int
+Uporabnik vnese besedo
+Izpiši ali se v besedi nahaja...
+* binary
+* octal
+* hex
+  Pretvori besedo v int obliko.
 
 # Velikost decimalke
 Uporabnik vnese decimalko.
