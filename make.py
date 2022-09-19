@@ -10,7 +10,8 @@ for dirs in sorted(root.iterdir()):
 		readme.append(f'## {dataobject}')
 		for markdown in sorted(dirs.iterdir()):
 			capter = " ".join(markdown.name.split('_')[1:]).replace('.md', '').capitalize()
-			readme.append(f' * [{capter}]({markdown})')
+			relativePath = str(markdown).replace("\\", "/")
+			readme.append(f' * [{capter}]({relativePath})')
 
 with open('README.md', 'w', errors='ignore') as file:
 	file.write("\n".join(readme))
