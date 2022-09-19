@@ -1,5 +1,8 @@
 # Izpisi matriko
-Definiraj matriko. Izpisi matriko v kvadratni obliki.
+Definiraj matriko. Izpisi matriko v...
+ * stolpčni obliki
+ * vrstični obliki.
+ * kvadratni obliki.
 
 # Vrstica, stolpec
 Definiraj matriko in vanjo vnesi naključna števila.
@@ -10,7 +13,7 @@ Izpiši...
 * Vsa števila stranske diagonale.
 
 # Zgornja polovica
-Definiraj matriko in vanjo vnesi naključna števila
+Definiraj matriko uporabnik vnese v matriko vsa števila.
 * Izpiši zgornjo polovico matrike
 * Desno polovico matrike
 
@@ -18,21 +21,3 @@ Definiraj matriko in vanjo vnesi naključna števila
 Definiraj matriko in vanjo vnesi naključna števila
 * Izpiši števila nad glavno diagonalo.
 * Izpiši stevila pod stransko diagonalo.
-
-# Sinusni graf
-Izpisi sinusni graf na zaslon.
-
-# Krog
-Nariši krog na zaslon
-
-# Japonska zastava
-Nariši japonsko zastavo.
-
-# Diamant
-Nariši diamant (karo) na zaslon
-
-# Šahovnica
-Nariši šahovnico na zaslon.
-
-# Animirani zaslon
-Ustvari animirani zaslon animiranega grafa.

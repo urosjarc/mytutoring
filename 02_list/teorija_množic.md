@@ -18,6 +18,10 @@ Ustvari spisek simetrične razlike in ga izpiši.
 Ustvari dve množici poljubnih števil.
 Izpiši pare kartezičnega produkta.
 
+# Kartezični produkt brez ponovitev
+Ustvari dve množici poljubnih števil.
+Izpiši pare kartezičnega produkta pri čemer se ista para ne smeta ponoviti.
+
 # Vien diagram
 Ustvari tri množice (A,B,C) poljubnih števil.
 Ustvari spisek ki vsebuje števila v množici (AuB)nC
