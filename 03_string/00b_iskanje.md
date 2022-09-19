@@ -25,6 +25,9 @@ Odpri datoteko in preštej koliko vrstic se nahaja v datoteki.
 Uporabnik vnese besedo.
 Poišči kolikokrat se podana beseda ponovi v poljubni tekstovni datoteki.
 
+# Najpogostejša beseda
+Izpiši besedo ki se najpogosteje pojavi v tekstovni datoteki ter kolikokrat.
+
 # Oddaljenost besed.
 Uporabnik vnese dve enako dolgi besedi.
 Izpiši katera je večja in izračunaj dolžino vektorske razlike besed.
