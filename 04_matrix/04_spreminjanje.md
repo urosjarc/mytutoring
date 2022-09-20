@@ -10,6 +10,9 @@ Odstrani vrstico iz matrike
 # Odstrani stolpec
 Odstrani stolpec iz matrike
 
+# Filtriranje
+Odstrani vrstice matrike katere ne ustrezajo pogoju.
+
 # Dodaj matriko po vertikali
 Prilepi 2 matriko prvi matriki po vertikali spodaj.
 
