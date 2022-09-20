@@ -21,3 +21,7 @@ Definiraj matriko uporabnik vnese v matriko vsa števila.
 Definiraj matriko in vanjo vnesi naključna števila
 * Izpiši števila nad glavno diagonalo.
 * Izpiši stevila pod stransko diagonalo.
+
+# Unikatna matrika
+Ustvari matriko iz specifičnih dimenzij. Uporabnik naj vnaša njena števila.
+V matriko vnesi samo unikatna števila dokler ni matrika polna.

@@ -33,3 +33,6 @@ Ustvari spisek številk.
 Izpisi...
 * Trojčke števil v spisku, ki se držijo skupaj od začetka proti koncu.
 * Trojčke števil v spisku, ki se držijo skupaj od konca proti začetku.
+
+## Unikatni elementi
+Uporabnik vnaša števila za spisek. V spisek vnašaj samo unikatna števila dokler ni spisek poln.
