@@ -1,8 +1,6 @@
-# -*- coding: windows-1250 -*-
-import os
 from pathlib import Path
 
-root = Path('.')
+root = Path('../docs')
 readme = ['# Podatkovne strukture']
 for dirs in sorted(root.iterdir()):
 	if dirs.is_dir() and not dirs.name.startswith('.'):
@@ -13,5 +11,5 @@ for dirs in sorted(root.iterdir()):
 			relativePath = str(markdown).replace("\\", "/")
 			readme.append(f' * [{capter}]({relativePath})')
 
-with open('README.md', 'w', errors='ignore') as file:
+with open('../README.md', 'w', errors='ignore') as file:
 	file.write("\n".join(readme))

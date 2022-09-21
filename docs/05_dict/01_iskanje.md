@@ -1,3 +1,6 @@
+# Razlike
+Imas dva slovarja, poišči razlike.
+
 # Frekvenca besed
 Uporabnik vnese stavek. Izpiši za vsako besedo kolikokrat se je ponovoila v stavku.
 
