@@ -36,6 +36,12 @@
  * [Matricni operatorji](04_matrix/06_matricni_operatorji.md)
  * [Machine learning](04_matrix/07_machine_learning.md)
 ## Dict
+ * [Izpisovanje](05_dict/00_izpisovanje.md)
+ * [Iskanje](05_dict/01_iskanje.md)
+ * [Preurejanje](05_dict/02_preurejanje.md)
+ * [Spreminjanje](05_dict/03_spreminjanje.md)
+ * [Mapiranje](05_dict/04_mapiranje.md)
+ * [Asociativni algoritmi](05_dict/05_asociativni_algoritmi.md)
 ## Object
 ## Branch
 ## Tree
