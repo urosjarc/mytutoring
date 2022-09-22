@@ -39,15 +39,17 @@ def make_clients():
 	for client in this.clients:
 		client_path = root.joinpath(client)
 		shutil.rmtree(client_path, ignore_errors=True)
+
+		test_root = Path(src.clients.__file__).parent
+		client_path.mkdir(parents=True, exist_ok=True)
+		shutil.copy(src=test_root.joinpath(f'{client}.py'), dst=client_path.joinpath('__init__.py'))
+
 		for name, exercise in this.exercises.items():
 
 			module_path = client_path.joinpath(exercise.module.__name__.replace('tests.', '').replace('.', '/'))
 			module_path.parent.mkdir(parents=True, exist_ok=True)
-			file_path = client_path.joinpath(f'{exercise.function.__name__}.py')
+			file_path = module_path.parent.joinpath(f'{exercise.function.__name__}.py')
 
 			with open(file_path, 'a') as file:
 				code = getattr(exercise, client)()
 				file.write(code)
-
-		test_root = Path(src.clients.__file__).parent
-		shutil.copy(src=test_root.joinpath(f'{client}.py'), dst=root.joinpath(f'{client}/__init__.py'))

@@ -2,9 +2,10 @@
 This is module docs...
 """
 
+
 def exercise_00(a: int, b: int) -> int:
 	"""
-	Vrni vsoto števil.
+	Vrni vsoto stevil.
 	:param a: /
 	:param b: /
 	:return: a+b
@@ -14,11 +15,12 @@ def exercise_00(a: int, b: int) -> int:
 	-6,-2,-8
 	-2,3,1
 	"""
-	return a+b
+	return a + b
+
 
 def exercise_01(a: int, b: int) -> int:
 	"""
-	Vrni vsoto števil.
+	Vrni vsoto stevil.
 	:param a: /
 	:param b: /
 	:return: a+b
@@ -28,4 +30,4 @@ def exercise_01(a: int, b: int) -> int:
 	-6,-2,-8
 	-2,3,1
 	"""
-	return a+b
+	return a + b
