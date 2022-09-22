@@ -9,7 +9,9 @@ app = Flask(__name__)
 def test(test_id):
 	exercise = db.exercises[test_id]
 	if request.method == 'GET':
-		return db.exercises[test_id]._inputs
+		data = db.exercises[test_id]._inputs
+		print(f"Test[GET]: {data}")
+		return data
 	if request.method == 'POST':
 		passing = True
 		predicted = request.json
@@ -20,5 +22,6 @@ def test(test_id):
 				passing = False
 			predicted[i]['expected'] = expected[i]
 			predicted[i]['pass'] = not fail
-		print('PASS:', passing)
+
+		print(f'Test[POST]: {predicted}')
 		return predicted

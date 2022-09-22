@@ -15,14 +15,11 @@ clients = []
 
 
 def init():
-	for k, v in Exercise.__dict__.items():
-		if not k.startswith('_'):
-			this.clients.append(k)
-	read()
-	make_clients()
+	init_exercises()
+	init_clients()
 
 
-def read():
+def init_exercises():
 	for dir in this.root.joinpath('tests').iterdir():
 		if dir.is_dir() and not dir.name.startswith('__'):
 			for file in dir.iterdir():
@@ -34,7 +31,10 @@ def read():
 						this.exercises[k] = Exercise(mod, v)
 
 
-def make_clients():
+def init_clients():
+	for k, v in Exercise.__dict__.items():
+		if not k.startswith('_'):
+			this.clients.append(k)
 
 	for client in this.clients:
 		client_path = root.joinpath(client)
