@@ -5,13 +5,16 @@ import importlib
 from typing import Dict, Callable
 
 from src.domain import Exercise
-import tests
-import src.clients
+import tests.clients
 
 this = sys.modules[__name__]
 root = Path(tests.__file__).parent.parent
 exercises: Dict[str, Exercise] = {}
-clients = []
+clients = {
+	'python': ('python', '__init__.py'),
+	'javascript': ('javascript', 'index.js'),
+	'java': ('java/src', 'client.java'),
+}
 
 
 def init():
@@ -21,7 +24,7 @@ def init():
 
 def init_exercises():
 	for dir in this.root.joinpath('tests').iterdir():
-		if dir.is_dir() and not dir.name.startswith('__'):
+		if dir.is_dir() and not dir.name.startswith('__') and dir.name not in ['clients']:
 			for file in dir.iterdir():
 				package = dir.name
 				module = file.name.replace('.py', '')
@@ -32,24 +35,21 @@ def init_exercises():
 
 
 def init_clients():
-	for k, v in Exercise.__dict__.items():
-		if not k.startswith('_'):
-			this.clients.append(k)
+	test_root = Path(tests.clients.__file__).parent
 
-	for client in this.clients:
-		client_path = root.joinpath(client)
-		shutil.rmtree(client_path, ignore_errors=True)
+	for language, (lang_dir, lang_file) in this.clients.items():
+		ext = lang_file.split('.')[-1]
+		client_dir = root.joinpath(lang_dir)
+		shutil.rmtree(client_dir, ignore_errors=True)
 
-		test_root = Path(src.clients.__file__).parent
-		client_path.mkdir(parents=True, exist_ok=True)
-		shutil.copy(src=test_root.joinpath(f'{client}.py'), dst=client_path.joinpath('__init__.py'))
+		client_dir.mkdir(parents=True, exist_ok=True)
+		shutil.copy(src=test_root.joinpath(lang_file), dst=client_dir.joinpath(lang_file))
 
 		for name, exercise in this.exercises.items():
-
-			module_path = client_path.joinpath(exercise.module.__name__.replace('tests.', '').replace('.', '/'))
+			module_path = client_dir.joinpath(exercise.module.__name__.replace('tests.', '').replace('.', '/'))
 			module_path.parent.mkdir(parents=True, exist_ok=True)
-			file_path = module_path.parent.joinpath(f'{exercise.function.__name__}.py')
+			file_path = module_path.parent.joinpath(f'{exercise.function.__name__}.{ext}')
 
 			with open(file_path, 'a') as file:
-				code = getattr(exercise, client)()
+				code = getattr(exercise, language)()
 				file.write(code)

@@ -24,9 +24,10 @@ def extend_str(obj, length: int):
 
 def print_results(results):
 	print()
-	keys = ['pass', 'time [sec]', 'input', 'output', 'expected']
 	if len(results) == 0:
 		return print("No tests found")
+
+	keys = ['pass', 'time [sec]', 'input', 'output', 'expected']
 
 	# Calculating lengths
 	length = {k: 0 for k in keys}

@@ -30,7 +30,7 @@ class Exercise:
 	def __init(self):
 
 		is_docs = True
-		for i, line in enumerate(self.function.__doc__.split('\n')):
+		for i, line in enumerate(self.function.__doc__.replace('\t', '').split('\n')):
 			if is_docs:
 				self.docs += line + "\n"
 			elif line.count(',') == len(self.args):
@@ -47,9 +47,27 @@ class Exercise:
 	@property
 	def _inputs(self):
 		return [test.inputs for test in self.tests]
+
 	@property
 	def _outputs(self):
 		return [test.result for test in self.tests]
+
+	@property
+	def _java_docs(self):
+		# DOCS
+		docs_final = ""
+		docs_list = self.docs.split('\n')
+		for i, docs in enumerate(docs_list):
+			fdocs = docs.strip().split()
+			if len(fdocs) != 0:
+				if fdocs[0].startswith(':param'):
+					for i in range(0, 2):
+						fdocs[i] = fdocs[i].replace(':', '').replace('param', '@param')
+				elif fdocs[0].startswith(':return:'):
+					fdocs[0] = fdocs[0].replace(':return:', '@return')
+
+			docs_final += ("\t* " if i != 0 else "* ") + " ".join(fdocs) + "\n"
+		return docs_final
 
 	def python(self):
 		args_str = ", ".join([f"{arg.name}: {arg.annotation.__name__}" for arg in self.args])
@@ -66,3 +84,60 @@ class Exercise:
 			if __name__ == '__main__':
 				python.test({self.function.__name__})
 		'''.replace("\t\t\t", "").strip() + "\n"
+
+	def java(self):
+		return_values = {
+			'int': {"default": -1, "fromString": "Integer.parseInt(var)"},
+			'float': {"default": -1, "fromString": "Float.parseFloat(var)"},
+			'str': {"default": "-1", "fromString": "String.valueOf(var)"},
+			'chr': {"default": '-1', "fromString": "var.charAt(0)"},
+		}
+
+		return_value = return_values.get(self.return_type.__name__, "new Object()")
+		args_str = ", ".join([f"{arg.annotation.__name__} {arg.name}" for arg in self.args])
+		run_args_str = ", ".join([f"{return_values[str(arg.annotation.__name__)]['fromString'].replace('var', arg.name)}" for arg in self.args])
+
+
+
+		return f'''
+			public class {self.function.__name__} <
+				
+				/**
+				{self._java_docs}\t*/
+				public static {self.return_type.__name__} run({args_str})<
+					return {return_value['default']};
+				>
+				
+				public static String wrapper(String a, String b)<
+					return String.valueOf(run({run_args_str}));
+				>
+				
+				public static void main(String[] args)<
+					java.test({self.function.__name__}.class);
+				>
+			>	
+		'''.replace("\t\t\t", "").strip().replace('<', '{').replace('>', '}') + "\n"
+
+	def javascript(self):
+		args_str = ", ".join([f"{arg.annotation.__name__}" for arg in self.args])
+
+		return f"""
+		<html>
+			<head>
+				<script src="../../index.js"></script
+				<script>
+					/**
+					{self._java_docs}\t*/
+					function {self.function.__name__}({args_str})<<
+						return null;	
+					>>
+					
+					test({self.function.__name__});
+				</script>
+			</head>
+			
+			<body>
+				<table id="table"></table>
+			</body>
+		</html>
+		""".replace("\t\t\t", "").strip().replace('<<', '{').replace('>>', '}') + "\n"
