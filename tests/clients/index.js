@@ -6,55 +6,59 @@ function request(path, data=null){
     if(data != null){
         options = {
             method: "POST",
-            body: data
+            body: JSON.stringify(data),
         };
     }
-    fetch(url(path), options).then(data=>data.json());
+    options.mode = 'cors';
+    options.headers = {
+        'Content-Type': 'application/json'
+    };
+    return fetch(url(path), options).then(data=>data.json());
 }
-function extend_str(obj, length: int){
-    let obj = String(obj);
+function extend_str(obj, length){
+    obj = String(obj);
     let diff = length - obj.length;
     return obj + " " * diff;
 }
 function print_results(results){
-    console.log();
+    let tableDOM = document.getElementById("table");
+
     if(results.length == 0){
-        return console.log("No tests found");
+        return tableDOM.innerHTML = "<h1 style='color: red'>No tests found</h1>";
     }
 
 	let keys = ['pass', 'time [sec]', 'input', 'output', 'expected']
-    let length = {};
-    for(let key of keys) length[key] = 0;
 	for(let result of results){
-		result['pass'] = "...." if result['pass'] else "XXX"
-		for(let k of keys){
-			length[k] = Math.max(length[k], String(k).length, String(result[k]).length))
-		}
+		result['pass'] = result['pass'] ? "<h1 style='color: green'>&#9745;</h1>" : "<h1 style='color: red'>&#9746;<h1>";
     }
 
-    table = "<tr>";
-	for(let k of keys)
-		table += `${k}`;
-    table += "</tr><tr>";
-	for(let result of results)
-		for(let k of keys)
-            table += `${result[k]}`;
+    let table = "<tr>";
+	for(let k of keys){
+		table += `<td><h1>${k}</h1></td>`;
+    }
     table += "</tr>";
 
-    let table = document.getElementById("table");
-    table.innerHTMl += table;
+	for(let result of results){
+        table += "<tr>";
+		for(let k of keys){
+            table += `<td><h2>${result[k]}</h2></td>`;
+        }
+        table += "</tr>";
+    }
+
+    tableDOM.innerHTML = table;
 }
 function test(fun){
-    let path = `test/{fun.name}`;
+    let path = `test/${fun.name}`;
     request(path).then(tests => {
         predictions = [];
         for(let test of tests){
             let start = performance.now();
-            fun(*test.input);
+            let result = fun(...test.input);
             let stop = performance.now();
             if(result != null){
                 test.output = result;
-                test['time [sec]'] = Math.round((stop-start)*1000, 10);
+                test['time [sec]'] = ((stop-start)/1000.0).toFixed(5);
                 predictions.push(test)
             }
         }

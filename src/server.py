@@ -1,8 +1,10 @@
 from flask import Flask, request
+from flask_cors import CORS
 
 from src import db
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/test/<test_id>", methods=['POST', "GET"])

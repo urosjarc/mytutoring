@@ -32,7 +32,7 @@ class Exercise:
 		is_docs = True
 		for i, line in enumerate(self.function.__doc__.replace('\t', '').split('\n')):
 			if is_docs:
-				self.docs += line + "\n"
+				self.docs += "\t" + line + "\n"
 			elif line.count(',') == len(self.args):
 				infos = line.split(',')
 				result = self.return_type(infos.pop(-1))
@@ -52,8 +52,8 @@ class Exercise:
 	def _outputs(self):
 		return [test.result for test in self.tests]
 
-	@property
-	def _java_docs(self):
+	def _cdocs(self, prepend: str=""):
+
 		# DOCS
 		docs_final = ""
 		docs_list = self.docs.split('\n')
@@ -66,8 +66,8 @@ class Exercise:
 				elif fdocs[0].startswith(':return:'):
 					fdocs[0] = fdocs[0].replace(':return:', '@return')
 
-			docs_final += ("\t* " if i != 0 else "* ") + " ".join(fdocs) + "\n"
-		return docs_final
+			docs_final += (prepend + " * " if i != 0 else "* ") + " ".join(fdocs) + "\n"
+		return docs_final[:-1]
 
 	def python(self):
 		args_str = ", ".join([f"{arg.name}: {arg.annotation.__name__}" for arg in self.args])
@@ -98,12 +98,13 @@ class Exercise:
 		run_args_str = ", ".join([f"{return_values[str(arg.annotation.__name__)]['fromString'].replace('var', arg.name)}" for arg in self.args])
 
 
-
+		docs = self._cdocs("\t")
 		return f'''
 			public class {self.function.__name__} <
 				
 				/**
-				{self._java_docs}\t*/
+				 {docs}
+				 */
 				public static {self.return_type.__name__} run({args_str})<
 					return {return_value['default']};
 				>
@@ -119,25 +120,18 @@ class Exercise:
 		'''.replace("\t\t\t", "").strip().replace('<', '{').replace('>', '}') + "\n"
 
 	def javascript(self):
-		args_str = ", ".join([f"{arg.annotation.__name__}" for arg in self.args])
+		args_str = ", ".join([f"{arg.name}" for arg in self.args])
 
+		docs = self._cdocs()
 		return f"""
-		<html>
-			<head>
-				<script src="../../index.js"></script
-				<script>
-					/**
-					{self._java_docs}\t*/
-					function {self.function.__name__}({args_str})<<
-						return null;	
-					>>
-					
-					test({self.function.__name__});
-				</script>
-			</head>
+			<html><head><script src="../../index.js"></script><script>
 			
-			<body>
-				<table id="table"></table>
-			</body>
-		</html>
+			/**
+			 {docs}
+			 */
+			function {self.function.__name__}({args_str})<<
+				return null;	
+			>>
+						
+			test({self.function.__name__});</script></head><body><table id="table" border="1" width="100%"></table></body></html>
 		""".replace("\t\t\t", "").strip().replace('<<', '{').replace('>>', '}') + "\n"

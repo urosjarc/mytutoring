@@ -11,9 +11,9 @@ this = sys.modules[__name__]
 root = Path(tests.__file__).parent.parent
 exercises: Dict[str, Exercise] = {}
 clients = {
-	'python': ('python', '__init__.py'),
-	'javascript': ('javascript', 'index.js'),
-	'java': ('java/src', 'client.java'),
+	'python': ('python', '__init__.py', 'py'),
+	'javascript': ('javascript', 'index.js', 'html'),
+	'java': ('java/src', 'client.java', 'java'),
 }
 
 
@@ -37,8 +37,7 @@ def init_exercises():
 def init_clients():
 	test_root = Path(tests.clients.__file__).parent
 
-	for language, (lang_dir, lang_file) in this.clients.items():
-		ext = lang_file.split('.')[-1]
+	for language, (lang_dir, lang_file, ext) in this.clients.items():
 		client_dir = root.joinpath(lang_dir)
 		shutil.rmtree(client_dir, ignore_errors=True)
 
@@ -47,8 +46,8 @@ def init_clients():
 
 		for name, exercise in this.exercises.items():
 			module_path = client_dir.joinpath(exercise.module.__name__.replace('tests.', '').replace('.', '/'))
-			module_path.parent.mkdir(parents=True, exist_ok=True)
-			file_path = module_path.parent.joinpath(f'{exercise.function.__name__}.{ext}')
+			module_path.mkdir(parents=True, exist_ok=True)
+			file_path = module_path.joinpath(f'{exercise.function.__name__}.{ext}')
 
 			with open(file_path, 'a') as file:
 				code = getattr(exercise, language)()
