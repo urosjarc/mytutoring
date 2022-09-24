@@ -47,7 +47,9 @@ class java {
             stringBuilder.append("}, ");
         });
         stringBuilder.append(']');
-        return stringBuilder.toString();
+        return stringBuilder.toString()
+            .replace(", }", "}")
+            .replace(", ]", "]");
     }
 
     public static String request(String path, String data){
@@ -142,8 +144,6 @@ class java {
         }
 
         String data = encodeRequest(tests)
-                .replace(", }", "}")
-                .replace(", ]", "]");
         String response2 = request(path, data);
         ArrayList<HashMap<String, String>> results = parseResponse(response2);
         printResult(results);

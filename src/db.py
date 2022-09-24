@@ -14,6 +14,7 @@ clients = {
 	'python': ('python', '__init__.py', 'py'),
 	'javascript': ('javascript', 'index.js', 'html'),
 	'java': ('java/src', 'client.java', 'java'),
+	'c': ('c', 'client.h', 'h'),
 }
 
 
@@ -24,7 +25,7 @@ def init():
 
 def init_exercises():
 	for dir in this.root.joinpath('tests').iterdir():
-		if dir.is_dir() and not dir.name.startswith('__') and dir.name not in ['clients']:
+		if dir.is_dir() and not dir.name.startswith('__') and dir.name not in ['client']:
 			for file in dir.iterdir():
 				package = dir.name
 				module = file.name.replace('.py', '')

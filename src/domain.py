@@ -135,3 +135,30 @@ class Exercise:
 						
 			test({self.function.__name__});</script></head><body><table id="table" border="1" width="100%"></table></body></html>
 		""".replace("\t\t\t", "").strip().replace('<<', '{').replace('>>', '}') + "\n"
+
+	def c(self):
+		return_values = {
+					 'int': {"default": -1, "fromString": "Integer.parseInt(var)"},
+					 'float': {"default": -1, "fromString": "Float.parseFloat(var)"},
+					 'str': {"default": "-1", "fromString": "String.valueOf(var)"},
+					 'chr': {"default": '-1', "fromString": "var.charAt(0)"},
+						}
+
+		return_value = return_values.get(self.return_type.__name__, "new Object()")
+		args_str = ", ".join([f"{arg.annotation.__name__} {arg.name}" for arg in self.args])
+
+		docs = self._cdocs("\t")
+		return f'''
+			#include "../../client.h"
+		
+			/**
+			 {docs}
+			 */
+			{self.return_type.__name__} run({args_str})<
+				return {return_value['default']};
+			>
+				
+			int main()<
+				test({self.function.__name__}.class);
+			>
+		'''.replace("\t\t\t", "").strip().replace('<', '{').replace('>', '}') + "\n"
