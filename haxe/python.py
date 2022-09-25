@@ -4,6 +4,7 @@ This is module docs...
 import json
 from typing import List
 
+
 def encode(data):
 	if isinstance(data, int | float):
 		return str(data)
@@ -15,7 +16,7 @@ def encode(data):
 		if len(data) != 0:
 			s = '['
 			for d in data:
-				s+=f'{encode(d)}, '
+				s += f'{encode(d)}, '
 			return s[:-2] + ']'
 		else:
 			return '[]'
@@ -30,47 +31,9 @@ def encode(data):
 		else:
 			return '{}'
 
-def decode(obj):
-	pass
 
-class Test:
-	def __init__(self):
-		self.a = 'asf'
-
-class Node:
-	def __init__(self, value: int, name: str, children=None):
-		self.value: int = value
-		self.name: str = name
-		self.child = Test()
-		self.children: List[Node] = children
-		if self.children is None:
-			self.children = []
-		self.test = {'test': 0, 'adf': Test()}
-
-	def __str__(self):
-		return encode(self)
-
-	@staticmethod
-	def parse(data: str|dict):
-		if isinstance(data, str):
-			data = json.dumps(data)
-		return Node(value=data['value'], name=data['name'], children=[
-			Node.parse(child_data) for child_data in data['children']
-		])
-
-
-root = Node(0, "nic", [
-	Node(1, "ena"),
-	Node(2, "dva", [
-		Node(3, "tri"),
-		Node(4, "stiri", [
-			Node(5, "pet")
-		]),
-	])
-])
-print(str(root))
-print(json.dumps(json.loads(str(root))))
-
+def decode(string):
+	return json.loads(string)
 
 def exercise_00(root: int) -> int:
 	f"""
