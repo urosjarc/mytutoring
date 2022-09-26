@@ -1,35 +1,35 @@
+import ast
 import glob
 import shutil
 from pathlib import Path
 
-root = Path(".")
-langs = ['c', 'cpp', 'cs', 'java', 'js', 'py', 'swift', 'ts']
+from compiler.main import Compiler
 
-cmds = [
-	'@echo off\n',
-	'SET "CITO=%cd%\cito\\bin\Debug\\net6.0"',
-	'set "PATH=%DOT%;%CITO%;%PATH%"'
-]
 
-binDir = Path('bin')
-shutil.rmtree(binDir, ignore_errors=True)
+def run(sourceDir: Path, binDir: Path):
 
-for file in glob.iglob("clients/**/*.cs", recursive=True):
-	if 'obj' in file:
-		continue
+	compiler = Compiler()
+	sourceDir = sourceDir.resolve()
+	binDir = binDir.resolve()
+	shutil.rmtree(binDir, ignore_errors=True)
 
-	info = file.split('\\')
-	dirPath = "/".join(info[:-1])
-	file = info[-1]
-	fileName = file.replace('.cs', '')
+	for file in glob.iglob(f"{sourceDir}/**/*.py", recursive=True):
 
-	cmds.append(f'\nREM {dirPath}/{fileName}')
-	for lang in langs:
-		binDir = Path(f'bin/{lang}/{dirPath}')
-		binDir.mkdir(parents=True, exist_ok=True)
-		cmds.append(f'cito -o {binDir}/{fileName}.{lang} {dirPath}/{file}')
+		innerPath = Path(file).relative_to(sourceDir)
+		ext = innerPath.suffix[1:]
+		fileName = innerPath.name
 
-cmds.append(f'\ntimeout /t 30')
+		with open(file) as fstart:
+			endDir = binDir.joinpath(innerPath).resolve()
+			endDir.mkdir(parents=True, exist_ok=True)
 
-with open('MAKE.bat', 'w') as f:
-	f.write("\n".join(cmds))
+			module = ast.parse(fstart.read())
+			source = compiler.compile_module(module, ext)
+
+			with open(endDir.joinpath(fileName), 'w') as fend:
+				fend.write(source)
+
+
+if __name__ == '__main__':
+	run(sourceDir=Path('client').resolve(),
+	    binDir=Path('bin').resolve())
