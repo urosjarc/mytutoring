@@ -1,49 +1,49 @@
 -cp src\number\stevila_00
 --dce full
--main main
--python bin\number\stevila_00\main.py
+-main Main
+-python bin\number\stevila_00\Main.py
 --next
 
 -cp src\number\stevila_00
 --dce full
--main main
--js bin\number\stevila_00\main.js
+-main Main
+-js bin\number\stevila_00\Main.js
 -lib hxnodejs
 
 --next
 
 -cp src\number\stevila_00
 --dce full
--main main
--java bin\number\stevila_00\main.java
+-main Main
+-java bin\number\stevila_00\Main.java
 --next
 
 -cp src\number\stevila_00
 --dce full
--main main
--cpp bin\number\stevila_00\main.cpp
+-main Main
+-cpp bin\number\stevila_00\Main.cpp
 -D toolchain=mingw-cp src\number\stevila_00
 --dce full
--main test
--python bin\number\stevila_00\test.py
+-main Test
+-python bin\number\stevila_00\Test.py
 --next
 
 -cp src\number\stevila_00
 --dce full
--main test
--js bin\number\stevila_00\test.js
+-main Test
+-js bin\number\stevila_00\Test.js
 -lib hxnodejs
 
 --next
 
 -cp src\number\stevila_00
 --dce full
--main test
--java bin\number\stevila_00\test.java
+-main Test
+-java bin\number\stevila_00\Test.java
 --next
 
 -cp src\number\stevila_00
 --dce full
--main test
--cpp bin\number\stevila_00\test.cpp
+-main Test
+-cpp bin\number\stevila_00\Test.cpp
 -D toolchain=mingw

@@ -1,4 +1,4 @@
-# Podatkovne strukture
+Console.Apu# Podatkovne strukture
 ## Number
  * [Stevila](../docs/00_number/00_stevila.md)
  * [Stevilski operatorji](../docs/00_number/00a_stevilski_operatorji.md)

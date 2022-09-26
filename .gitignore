@@ -2,6 +2,6 @@
 *.iml
 cito
 haxe
-java
-python
-javascript
+bin
+*.yml
+*.hxml

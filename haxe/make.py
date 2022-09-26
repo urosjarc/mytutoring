@@ -7,7 +7,7 @@ shutil.rmtree('bin', ignore_errors=True)
 langs = [('py', 'python'), ('js', 'js'), ('java', 'java'), ('cpp', 'cpp')]
 
 with open('build.hxml', 'w') as f:
-	for filename in glob.iglob('**/.hx', recursive=True):
+	for filename in glob.iglob('**/*.hx', recursive=True):
 
 		paths = filename.split("\\")
 		bin_dir = Path('bin', *paths[1:-1])
@@ -23,7 +23,7 @@ with open('build.hxml', 'w') as f:
 				f'-{lang} {bin_dir.joinpath(file)}.{ext}\n',
 			]))
 
-			if lang =='js':
+			if lang == 'js':
 				f.write('-lib hxnodejs\n\n')
 
 			if lang == 'cpp':

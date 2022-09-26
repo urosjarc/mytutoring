@@ -9,4 +9,4 @@ cd cito
 dotnet build
 cd ..
 
-cito
+cito --version
