@@ -1,9 +1,10 @@
+from typing import List
+
 from compiler.language import Language
 from compiler.mapping import Mapping, mapping, Type
 
 
 class Python(Language):
-
 	map: Mapping = mapping.py
 
 	def imports(self, name) -> str:
@@ -46,3 +47,6 @@ class Python(Language):
 			f'if __name__ == "__main__":',
 			f'{body}'
 		])
+
+	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
+		return ''.join(imports + module_docs + functions)

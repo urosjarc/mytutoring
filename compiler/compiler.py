@@ -61,28 +61,39 @@ class Compiler:
 			string.append(self.lang.imports(alias.name) + '\n')
 		return ''.join(string)
 
-	def compile(self, module: ast.Module, ext: str) -> str:
+	def compile(self, fileName: str, module: ast.Module, ext: str) -> str:
 		self.lang = Compiler.lang[ext]
-		string = []
+
+		imports = []
+		functions = []
+		module_docs = []
+
 		first_import = False
-		n1, n2, n3 = ('\n'*i for i in range(1,4))
+		first_docs = False
+
+		n1, n2, n3 = ('\n' * i for i in range(1, 4))
+
 		for ele in module.body:
 			if isinstance(ele, ast.FunctionDef):
-				string.append(n2 + self.function(ele))
+				functions.append(n2 + self.function(ele))
 			elif isinstance(ele, ast.If):
-				string.append(n2 + self.main_function(ele))
+				functions.append(n2 + self.main_function(ele))
 			elif isinstance(ele, ast.Expr):
-				string.append(self.docs(ele.col_offset, ele.value.s) + n2)
+				if not first_docs:
+					first_docs = True
+					module_docs.append(self.docs(ele.col_offset, ele.value.s) + n2)
+				else:
+					functions.append(self.docs(ele.col_offset, ele.value.s) + n2)
 			elif isinstance(ele, ast.Import):
 				if not first_import:
 					first_import = True
 					def_imp = self.lang.imports('defaults')
 					if def_imp != '':
 						def_imp += '\n'
-					string.append(def_imp)
-				string.append(self.imports(ele.names))
+					imports.append(def_imp)
+				imports.append(self.imports(ele.names))
 
-		return ''.join(string)
+		return self.lang.module(fileName, imports, module_docs, functions)
 
 	def call_args(self, args: List[ast.Constant | ast.List]):
 		string = []

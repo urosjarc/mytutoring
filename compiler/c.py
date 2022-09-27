@@ -1,9 +1,8 @@
-from compiler.language import Language
 from compiler.mapping import Mapping, mapping, Type
+from compiler.python import Python
 
 
-class C(Language):
-
+class C(Python):
 	map: Mapping = mapping.c
 
 	def imports(self, name) -> str:
@@ -11,9 +10,6 @@ class C(Language):
 		for imports in self.map.imports[name]:
 			string.append(f'#include <{imports}.h>')
 		return '\n'.join(string)
-
-	def indent(self, offset: int) -> str:
-		return '\t' * offset
 
 	def args(self, typ: str, name: str):
 		return f'{typ} {name}'
@@ -33,7 +29,6 @@ class C(Language):
 		return '\n'.join(string)
 
 	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
-		# fun_indent = self.indent(indent)
 		return_indent = self.indent(indent + 1)
 		type: Type = self.map.types[returns]
 		return "\n".join([
@@ -43,13 +38,12 @@ class C(Language):
 			'}'
 		])
 
-	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
-		return f'{self.indent(indent)}assert({fun_name}({fun_call_args}) {operation} {test_value});'
-
 	def main_function(self, body):
 		return '\n'.join([
 			'int main(int argc, char *argv[]) {',
 			f'{body}',
 			'}'
 		])
-		first_import = True
+
+	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
+		return f'{self.indent(indent)}assert {fun_name}({fun_call_args}) {operation} {test_value}'

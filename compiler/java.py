@@ -1,55 +1,48 @@
+from typing import List
+
+from compiler.c import C
 from compiler.language import Language
 from compiler.mapping import Mapping, mapping, Type
 
 
-class Java(Language):
-
-	map: Mapping = mapping.cpp
+class Java(C):
+	map: Mapping = mapping.java
 
 	def imports(self, name) -> str:
 		string = []
 		for imports in self.map.imports[name]:
-			string.append(f'#include <{imports}>')
-		return '\n'.join(string)
-
-	def indent(self, offset: int) -> str:
-		return '\t' * offset
-
-	def args(self, typ: str, name: str):
-		return f'{typ} {name}'
-
-	def docs_param(self, var, info):
-		return f'@param {var} {info}'
-
-	def docs_return(self, info):
-		return f'@return {info}'
-
-	def docs(self, indent: int, docs: str) -> str:
-		ind = self.indent(0)
-		string = [f'{ind}/**']
-		for line in docs.split('\n'):
-			string.append(f'{ind} * {line.strip()}')
-		string.append(f'{ind} */')
+			string.append(f'import {imports};')
 		return '\n'.join(string)
 
 	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
-		# fun_indent = self.indent(indent)
-		return_indent = self.indent(indent + 1)
+		fun_indent = self.indent(indent + 1)
+		return_indent = self.indent(indent + 2)
+		docs = docs.replace("\n", f"\n{fun_indent}")
 		type: Type = self.map.types[returns]
 		return "\n".join([
-			f'{docs}',
-			f'{type.name} {name}({args})' + ' {\n',
+			f'{fun_indent}{docs}',
+			f'{fun_indent}public static {type.name} {name}({args})' + ' {\n',
 			f'{return_indent}return {type.default};',
-			'}'
+			f'{fun_indent}' + "}"
 		])
 
 	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
-		return f'{self.indent(indent)}assert({fun_name}({fun_call_args}) {operation} {test_value});'
+		return f'{self.indent(indent)}assert {fun_name}({fun_call_args}) {operation} {test_value};'
 
 	def main_function(self, body):
+		n1 = self.indent(1)
+		body = body.replace('\n', '\n' + n1)
 		return '\n'.join([
-			'int main(int argc, char *argv[]) {',
-			f'{body}',
-			'}'
+			n1 + 'public static void void main(String[] args) {',
+			n1 + f'{body}',
+			n1 + "}",
 		])
-		first_import = True
+
+	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
+		return ''.join(
+			imports +
+			module_docs +
+			[f'public class {fileName} ' + '{\n'] +
+			functions +
+			['}']
+		)

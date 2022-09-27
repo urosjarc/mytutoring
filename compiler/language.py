@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 
 class Language(ABC):
@@ -29,4 +30,7 @@ class Language(ABC):
 
 	@abstractmethod
 	def main_function(self, body: str):
+		pass
+
+	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
 		pass

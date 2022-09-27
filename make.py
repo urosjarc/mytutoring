@@ -18,10 +18,10 @@ def run(sourceDir: Path, binDir: Path):
 		with open(file) as fstart:
 			module = ast.parse(fstart.read())
 			for lang in Compiler.lang:
-				endDir = binDir.joinpath(lang, innerPath).resolve()
+				endDir = binDir.joinpath(lang, innerPath.parent).resolve()
 				endDir.mkdir(parents=True, exist_ok=True)
 
-				source = compiler.compile(module, lang)
+				source = compiler.compile(fileName, module, lang)
 
 				with open(endDir.joinpath(f'{fileName}.{lang}'), 'w') as fend:
 					fend.write(source)
