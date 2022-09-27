@@ -1,23 +1,22 @@
 import ast
 from typing import List
 
+from compiler.c import C
 from compiler.python import Python
 
 
 class Compiler:
-	lang = {'py': Python()}
+	lang = {
+		'py': Python(),
+		'c': C()
+	}
+
 	ops = {
 		ast.Eq: '=='
 	}
 
 	def __init__(self):
 		self.lang = None
-
-	def compile_body(self, body: List[ast.Expr]):
-		if len(body) > 0:
-			docs = body[0].value
-			indent = docs.col_offset
-			return self.compile_docs(indent, docs.s)
 
 	def compile_args(self, args: ast.arguments):
 		string = []
@@ -27,8 +26,10 @@ class Compiler:
 
 	def compile_fun(self, fun: ast.FunctionDef):
 		args = self.compile_args(fun.args)
-		body = self.compile_body(fun.body)
-		return self.lang.function(fun.col_offset, fun.name, args, fun.returns.id, body)
+
+		docs = fun.body[0].value
+		docs = self.compile_docs(docs.col_offset, docs.s)
+		return self.lang.function(fun.col_offset, fun.name, args, fun.returns.id, docs) + '\n'
 
 	def compile_docs(self, indent, docs):
 		string = []
@@ -50,18 +51,34 @@ class Compiler:
 				string.append(f'{self.lang.indent(indent)}{line}')
 		return self.lang.docs(indent, f'\n{self.lang.indent(indent)}'.join(string))
 
+	def compile_imports(self, aliases: List[ast.alias]):
+		string = []
+		for alias in aliases:
+			string.append(self.lang.imports(alias.name) + '\n')
+		return ''.join(string)
+
 	def compile_module(self, module: ast.Module, ext: str) -> str:
 		self.lang = Compiler.lang[ext]
 		string = []
+		first_import = False
+		n1, n2, n3 = ('\n'*i for i in range(1,4))
 		for ele in module.body:
 			if isinstance(ele, ast.FunctionDef):
-				string.append(self.compile_fun(ele))
+				string.append(n2 + self.compile_fun(ele))
 			elif isinstance(ele, ast.If):
-				string.append(self.compile_main(ele))
+				string.append(n2 + self.compile_main(ele))
 			elif isinstance(ele, ast.Expr):
-				string.append(self.compile_docs(ele.col_offset, ele.value.s))
+				string.append(self.compile_docs(ele.col_offset, ele.value.s) + n2)
+			elif isinstance(ele, ast.Import):
+				if not first_import:
+					first_import = True
+					def_imp = self.lang.imports('defaults')
+					if def_imp != '':
+						def_imp += '\n'
+					string.append(def_imp)
+				string.append(self.compile_imports(ele.names))
 
-		return ('\n' * 3).join(string)
+		return ''.join(string)
 
 	def compile_call_args(self, args: List[ast.Constant | ast.List]):
 		string = []

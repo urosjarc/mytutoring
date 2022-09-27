@@ -1,6 +1,6 @@
 def test3(a: int) -> int:
 	"""
-	Izpisi stevilo ki ga dobiš èe vneseno število...
+	Izpisi stevilo ki ga dobis ce vneseno stevilo...
 	:param a: Parameter notri
 	:return: Element
 	"""
@@ -8,7 +8,7 @@ def test3(a: int) -> int:
 
 def test5(a: int) -> int:
 	"""
-	Izpisi stevilo ki ga dobiš èe vneseno število...
+	Izpisi stevilo ki ga dobis ce vneseno število...
 	:param a: Parameter notri
 	:return: Element
 	"""

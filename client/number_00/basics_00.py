@@ -2,6 +2,9 @@
 This is module docs
 """
 
+import random
+import math
+
 
 def apokalipsa(a: int) -> int:
 	"""

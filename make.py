@@ -3,31 +3,28 @@ import glob
 import shutil
 from pathlib import Path
 
-from compiler.main import Compiler
+from compiler.compiler import Compiler
 
 
 def run(sourceDir: Path, binDir: Path):
-
 	compiler = Compiler()
 	sourceDir = sourceDir.resolve()
 	binDir = binDir.resolve()
 	shutil.rmtree(binDir, ignore_errors=True)
 
 	for file in glob.iglob(f"{sourceDir}/**/*.py", recursive=True):
-
 		innerPath = Path(file).relative_to(sourceDir)
-		ext = innerPath.suffix[1:]
-		fileName = innerPath.name
-
+		fileName = innerPath.stem
 		with open(file) as fstart:
-			endDir = binDir.joinpath(innerPath).resolve()
-			endDir.mkdir(parents=True, exist_ok=True)
-
 			module = ast.parse(fstart.read())
-			source = compiler.compile_module(module, ext)
+			for lang in Compiler.lang:
+				endDir = binDir.joinpath(lang, innerPath).resolve()
+				endDir.mkdir(parents=True, exist_ok=True)
 
-			with open(endDir.joinpath(fileName), 'w') as fend:
-				fend.write(source)
+				source = compiler.compile_module(module, lang)
+
+				with open(endDir.joinpath(f'{fileName}.{lang}'), 'w') as fend:
+					fend.write(source)
 
 
 if __name__ == '__main__':
