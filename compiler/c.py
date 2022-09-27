@@ -46,9 +46,10 @@ class C(Language):
 	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
 		return f'{self.indent(indent)}assert({fun_name}({fun_call_args}) {operation} {test_value});'
 
-	def main(self, body):
+	def main_function(self, body):
 		return '\n'.join([
 			'int main(int argc, char *argv[]) {',
 			f'{body}',
 			'}'
 		])
+		first_import = True

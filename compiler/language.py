@@ -28,5 +28,5 @@ class Language(ABC):
 		pass
 
 	@abstractmethod
-	def main(self, body: str):
+	def main_function(self, body: str):
 		pass

@@ -21,7 +21,7 @@ def run(sourceDir: Path, binDir: Path):
 				endDir = binDir.joinpath(lang, innerPath).resolve()
 				endDir.mkdir(parents=True, exist_ok=True)
 
-				source = compiler.compile_module(module, lang)
+				source = compiler.compile(module, lang)
 
 				with open(endDir.joinpath(f'{fileName}.{lang}'), 'w') as fend:
 					fend.write(source)
