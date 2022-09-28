@@ -7,7 +7,6 @@ from compiler.mapping import Mapping, mapping, Type
 
 class Java(C):
 	map: Mapping = mapping.java
-
 	def imports(self, name) -> str:
 		string = []
 		for imports in self.map.imports[name]:
@@ -33,7 +32,7 @@ class Java(C):
 		n1 = self.indent(1)
 		body = body.replace('\n', '\n' + n1)
 		return '\n'.join([
-			n1 + 'public static void void main(String[] args) {',
+			n1 + 'public static void main(String[] args) {',
 			n1 + f'{body}',
 			n1 + "}",
 		])
@@ -41,7 +40,7 @@ class Java(C):
 	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
 		return ''.join(
 			imports +
-			module_docs +
+			[module_docs[0][:-1]] +
 			[f'public class {fileName} ' + '{\n'] +
 			functions +
 			['}']

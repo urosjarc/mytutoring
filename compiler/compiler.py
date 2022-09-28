@@ -37,6 +37,8 @@ class Compiler:
 
 	def docs(self, indent, docs):
 		string = []
+		first_param = False
+		nx = self.lang.indent(indent)
 		for line in docs.split('\n'):
 			line = line.strip()
 			if line == '':
@@ -46,13 +48,16 @@ class Compiler:
 				info = line.replace(':', '').split()
 				typ = info[0]
 				if typ == 'param':
+					if not first_param:
+						first_param = True
+						string.append('')
 					string.append(self.lang.docs_param(info[1], ' '.join(info[1:])))
 				elif typ == 'return':
 					string.append(self.lang.docs_return(' '.join(info[1:])))
 				else:
 					raise Exception(f"Implement: {typ} docs")
 			else:
-				string.append(f'{self.lang.indent(indent)}{line}')
+				string.append(f'{nx}{line}')
 		return self.lang.docs(indent, f'\n{self.lang.indent(indent)}'.join(string))
 
 	def imports(self, aliases: List[ast.alias]):

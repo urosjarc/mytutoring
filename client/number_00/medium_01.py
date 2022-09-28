@@ -1,3 +1,6 @@
+"""
+TEeeesting
+"""
 def test3(a: int) -> int:
 	"""
 	Izpisi stevilo ki ga dobis ce vneseno stevilo...
@@ -9,7 +12,9 @@ def test3(a: int) -> int:
 def test5(a: int) -> int:
 	"""
 	Izpisi stevilo ki ga dobis ce vneseno število...
+
 	:param a: Parameter notri
+
 	:return: Element
 	"""
 	return a+5

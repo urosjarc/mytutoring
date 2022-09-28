@@ -18,6 +18,7 @@ def apokalipsa(a: int) -> int:
 def test(a: int) -> int:
 	"""
 	Izpisi stevilo ki ga dobis ce vneseno stevilo...
+
 	:param a: Parameter notri
 	:return: Element
 	"""

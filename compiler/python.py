@@ -49,4 +49,4 @@ class Python(Language):
 		])
 
 	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
-		return ''.join(imports + module_docs + functions)
+		return ''.join(module_docs + imports + functions)
