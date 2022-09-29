@@ -1,7 +1,6 @@
 from typing import List
 
 from compiler.c import C
-from compiler.language import Language
 from compiler.mapping import Mapping, mapping, Type
 
 

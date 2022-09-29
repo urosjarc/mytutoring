@@ -103,7 +103,6 @@ class Compiler:
 	def call_args(self, args: List[ast.Constant | ast.List]):
 		string = []
 		for arg in args:
-			# TODO: Add more stuff here!
 			if isinstance(arg, ast.List):
 				string.append(self.call_args(arg))
 			elif isinstance(arg, ast.Constant):
