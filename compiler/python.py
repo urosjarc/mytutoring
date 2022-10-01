@@ -39,8 +39,8 @@ class Python(Language):
 			f'{return_indent}return {type.default}'
 		])
 
-	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
-		return f'{self.indent(indent)}assert {fun_name}({fun_call_args}) {operation} {test_value}'
+	def test(self, indent: int, fun_name: str, fun_call_args: str):
+		return f'{self.indent(indent)}{fun_name}({fun_call_args})'
 
 	def main_function(self, body):
 		return '\n'.join([

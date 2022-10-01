@@ -5,6 +5,7 @@ from compiler.c import C
 from compiler.cpp import Cpp
 from compiler.java import Java
 from compiler.python import Python
+from compiler.typescript import Typescript
 
 
 class Compiler:
@@ -12,11 +13,8 @@ class Compiler:
 		'py': Python(),
 		'c': C(),
 		'cpp': Cpp(),
-		'java': Java()
-	}
-
-	ops = {
-		ast.Eq: '=='
+		'java': Java(),
+		'ts': Typescript()
 	}
 
 	def __init__(self):
@@ -110,19 +108,16 @@ class Compiler:
 
 		return ', '.join(string)
 
-	def test(self, asrt: ast.Assert):
-		indent = asrt.col_offset
-		test = asrt.test
-		operation = self.ops[type(test.ops[0])]
-		fun_name = test.left.func.id
-		fun_call_args = self.call_args(test.left.args)
-		test_value = self.call_args(test.comparators)
-		return self.lang.test(indent, fun_name, fun_call_args, operation, test_value)
+	def test(self, exp: ast.Expr):
+		indent = exp.col_offset
+		call = exp.value
+		fun_name = call.func.id
+		fun_call_args = self.call_args(call.args)
+		return self.lang.test(indent, fun_name, fun_call_args)
 
 	def main_function(self, main_if: ast.If):
 		string = []
 		for ele in main_if.body:
-			if isinstance(ele, ast.Assert):
-				string.append(self.test(ele))
+			string.append(self.test(ele))
 		body = '\n'.join(string)
 		return self.lang.main_function(body) + '\n'  # END line

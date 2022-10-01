@@ -25,7 +25,7 @@ class Language(ABC):
 		pass
 
 	@abstractmethod
-	def test(self, indent: int, fun_name: str, fun_call_args: str, operation: str, test_value: str):
+	def test(self, indent: int, fun_name: str, fun_call_args: str):
 		pass
 
 	@abstractmethod
