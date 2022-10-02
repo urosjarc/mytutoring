@@ -1,5 +1,5 @@
-from compiler.mapping import Mapping, mapping, Type
-from compiler.python import Python
+from src.mapping import Mapping, mapping
+from src.python import Python
 
 
 class C(Python):
@@ -28,13 +28,11 @@ class C(Python):
 		string.append(f'{ind} */')
 		return '\n'.join(string)
 
-	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
+	def function(self, indent: int, name: str, args: str, docs: str):
 		return_indent = self.indent(indent + 1)
-		type: Type = self.map.types[returns]
 		return "\n".join([
 			f'{docs}',
-			f'{type.name} {name}({args})' + ' {\n',
-			f'{return_indent}return {type.default};',
+			f'void {name}({args})' + ' {\n\n',
 			'}'
 		])
 

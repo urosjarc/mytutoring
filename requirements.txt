@@ -1,1 +1,4 @@
 fastapi[all]
+sphinx
+myst-parser
+pytest

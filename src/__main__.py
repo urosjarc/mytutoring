@@ -1,9 +1,9 @@
 import ast
 import glob
 import shutil
-from pathlib import Path
 
-from compiler.compiler import Compiler
+from pathlib import Path
+from compiler import Compiler
 
 
 def run(sourceDir: Path, binDir: Path):
@@ -28,5 +28,5 @@ def run(sourceDir: Path, binDir: Path):
 
 
 if __name__ == '__main__':
-	run(sourceDir=Path('client').resolve(),
-	    binDir=Path('bin').resolve())
+	run(sourceDir=Path('../client').resolve(),
+	    binDir=Path('../bin').resolve())

@@ -1,5 +1,5 @@
-from compiler.c import C
-from compiler.mapping import Mapping, mapping, Type
+from src.c import C
+from src.mapping import Mapping, mapping, Type
 
 
 class Typescript(C):
@@ -20,13 +20,10 @@ class Typescript(C):
 	def docs_return(self, info):
 		return f'@return {info}'
 
-	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
-		return_indent = self.indent(indent + 1)
-		type: Type = self.map.types[returns]
+	def function(self, indent: int, name: str, args: str, docs: str):
 		return "\n".join([
 			f'{docs}',
-			f'function {name}({args}): {type.name} ' + ' {\n',
-			f'{return_indent}return {type.default};',
+			f'function {name}({args})' + ' {\n\n',
 			'}'
 		])
 

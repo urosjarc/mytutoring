@@ -1,7 +1,7 @@
 from typing import List
 
-from compiler.language import Language
-from compiler.mapping import Mapping, mapping, Type
+from src.language import Language
+from src.mapping import Mapping, mapping
 
 
 class Python(Language):
@@ -29,14 +29,13 @@ class Python(Language):
 		ind = self.indent(indent)
 		return f'{ind}"""\n{docs}\n{ind}"""'
 
-	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
+	def function(self, indent: int, name: str, args: str, docs: str):
 		fun_indent = self.indent(indent)
 		return_indent = self.indent(indent + 1)
-		type: Type = self.map.types[returns]
 		return "\n".join([
-			f'{fun_indent}def {name}({args}) -> {type.name}:',
+			f'{fun_indent}def {name}({args}):',
 			f'{docs}\n',
-			f'{return_indent}return {type.default}'
+			f'{return_indent}pass'
 		])
 
 	def test(self, indent: int, fun_name: str, fun_call_args: str):

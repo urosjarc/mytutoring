@@ -38,7 +38,6 @@ class Mapping:
 	def __getitem__(self, item):
 		return self.__dict__[item]
 
-
 c_char = Type('char', '')
 c_string = Type('char[]', "")
 cpp_string = Type('string', "")

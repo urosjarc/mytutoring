@@ -1,11 +1,11 @@
 import ast
 from typing import List
 
-from compiler.c import C
-from compiler.cpp import Cpp
-from compiler.java import Java
-from compiler.python import Python
-from compiler.typescript import Typescript
+from src.c import C
+from src.cpp import Cpp
+from src.java import Java
+from src.python import Python
+from src.typescript import Typescript
 
 
 class Compiler:
@@ -31,7 +31,7 @@ class Compiler:
 
 		docs = fun.body[0].value
 		docs = self.docs(docs.col_offset, docs.s)
-		return self.lang.function(fun.col_offset, fun.name, args, fun.returns.id, docs) + '\n'
+		return self.lang.function(fun.col_offset, fun.name, args, docs) + '\n'
 
 	def docs(self, indent, docs):
 		string = []

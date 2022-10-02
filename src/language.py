@@ -21,7 +21,7 @@ class Language(ABC):
 		pass
 
 	@abstractmethod
-	def function(self, indent: int, name: str, args: str, returns: str, docs: str):
+	def function(self, indent: int, name: str, args: str, docs: str):
 		pass
 
 	@abstractmethod

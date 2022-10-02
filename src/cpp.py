@@ -1,6 +1,6 @@
-from compiler.c import C
-from compiler.language import Language
-from compiler.mapping import Mapping, mapping, Type
+from src.c import C
+from src.language import Language
+from src.mapping import Mapping, mapping, Type
 
 
 class Cpp(C):
