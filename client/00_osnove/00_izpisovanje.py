@@ -6,17 +6,19 @@ def hello_world():
 	"""
 	print("Hello, world!")
 
-def returns(a: int):
+def returns(a: int, b: float, c: chr, d: str):
 	"""
-	Iz funkcije vrni stevilko ki je podana kot parameter funkcije.
-	:param a: Parameter funkcije.
-	:return: Parameter a.
-	>>> returns(5)
-	5
-	>>> returns(10)
-	10
+	Iz funkcije vrni stavek v katerem uporabi vse dane argumente funkcije: "Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}.
+	:param a: Cela stevilka.
+	:param b: Decimalka.
+	:param c: Crka.
+	:param d: Beseda.
+	>>> print(returns(5, -1.2, 'a', 'prva beseda'))
+	Cela stevilka: 5, Decimalka: -1.2, Crka: a, Beseda: prva beseda.
+	>>> print(returns(-10, 0.12, 'b', 'druga beseda'))
+	Cela stevilka: -10, Decimalka: 0.12, Crka: b, Beseda: druga beseda.
 	"""
-	return a
+	return f"Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}."
 
 def argumenti(a: int, b: float, c: chr, d: str):
 	"""
@@ -36,18 +38,10 @@ def argumenti(a: int, b: float, c: chr, d: str):
 def stdin():
 	"""
 	Uporabnik bo vnesel v terminal celo stevilko, decimalko, crko in besedo.
-	Izpisi stavek v katerem uporabi vse vnesene informacije: "Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}.
-	>>> stdin()
-	Vnesi celo stevilko: 5
-	vnesi decimalko: -1.2
-	Vnesi crko: a
-	Vnesi besedo: prva beseda.
+	Iz funkcije vrni stavek v katerem uporabi vse vnesene informacije: "Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}.
+	>>> print(stdin())
 	Cela stevilka: 5, Decimalka: -1.2, Crka: a, Beseda: prva beseda.
-	>>> stdin()
-	Vnesi celo stevilko: -10
-	vnesi decimalko: 0.12
-	Vnesi crko: b
-	Vnesi besedo: druga beseda.
+	>>> print(stdin())
 	Cela stevilka: -10, Decimalka: 0.12, Crka: b, Beseda: druga beseda.
 	"""
 
@@ -55,4 +49,4 @@ def stdin():
 	b = float(input("vnesi decimalko: -1.2"))
 	c = str(input("Vnesi crko: a"))
 	d = str(input("Vnesi besedo: prva beseda."))
-	print(f"Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}.")
+	return f"Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}."

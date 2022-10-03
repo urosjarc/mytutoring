@@ -2,6 +2,18 @@
 This is module docs
 """
 import math
+import random
+
+
+def number_overflow():
+	"""
+	Izpisi stevilo 2147483647 in 2147483648 kot celo stevilko.
+	>>> number_overflow()
+	2147483647
+	0
+	"""
+	print(2147483647)
+	print(2147483648)
 
 
 def format_stevilke(a: int):
@@ -22,6 +34,7 @@ def format_stevilke(a: int):
 	print(f'Hex: {hex(a)}')
 	print(f'Sci: {a:e}')
 
+
 def zapis_stevilke():
 	"""
 	Iz funkcije vrni rezultat racuna: 0b1111011 + 0o173 - 123 - 0x7b + 1.230000e+02
@@ -31,28 +44,8 @@ def zapis_stevilke():
 	"""
 	return 0b1111011 + 0o173 - 123 - 0x7b + 1.230000e+02
 
-def konstante():
-	"""
-	Izpisi PI in Eulerjevo stevilo, zavkrozeno na 10-to decimalko vsaki v svoji vrstici.
-	"""
-	print(round(math.pi, 10))
-	print(round(math.e, 10))
 
 
-def number_overflow():
-	"""
-	Izpisi stevilo 2147483647 in 2147483648 kot celo stevilko.
-	>>> number_overflow()
-	2147483647
-	0
-	"""
-	print(2147483647)
-	print(0)
-
-def nakljucna_stevilka():
-	"""
-	Izpisi nakljucno stevilko med -10 in 21.
-	"""
 
 def tabela_stevil(s1: int, s2: int, s3: int, s4: int, s5: int, s6: int, s7: int, s8: int, s9: int):
 	"""

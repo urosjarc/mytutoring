@@ -2,11 +2,11 @@
 
 def U_mad_bro():
 	r"""
-	Izpisi smejkota [U mad bro]: ¯\_('.")_/¯
+	Izpisi smejkota [U mad bro]: % ¯\_('.")_/¯ %
 	>>> U_mad_bro()
-	¯\_('.")_/¯
+	% ¯\_('.")_/¯ %
 	"""
-	print("¯\\_('.\")_/¯")
+	print("% ¯\\_('.\")_/¯ %")
 
 
 def unicode_ascii_znaki():
