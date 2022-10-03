@@ -23,6 +23,7 @@ def int_float(a: int):
 	"""
 	return float(a)
 
+
 def dec_bin(a: int):
 	pass
 
