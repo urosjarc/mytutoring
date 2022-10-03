@@ -1,16 +1,9 @@
-def hello_world():
-	"""
-	Na zaslon izpisi: "Hello, world!
-	>>> hello_world()
-	Hello, world!
-	"""
-	print("Hello, world!")
 
 
-def escape_sequence():
+def U_mad_bro():
 	r"""
 	Izpisi smejkota [U mad bro]: ¯\_('.")_/¯
-	>>> escape_sequence()
+	>>> U_mad_bro()
 	¯\_('.")_/¯
 	"""
 	print("¯\\_('.\")_/¯")
@@ -63,15 +56,20 @@ def carriage_return():
 	>>> carriage_return()
 	Hello!
 	"""
-	print("Hello!")
+	print("Hello, world!\rHello!")
 
 
-def horizontal_tab():
+def horizontal_tab(a: int, b: int, c: int, d: int, e: int, f: int):
 	"""
-	Na zaslon izpisi tabelo v lepi obliki: 1\t1\n22\t22\n333\t333
-	>>> horizontal_tab()
+	Na zaslon izpisi tabelo iz parametrov funkcije.
+	V vsaki vrstici izpisi po dve stevili.
+	>>> horizontal_tab(1,1,22,22,333,333)
 	1   1
 	22  22
 	333 333
+	>>> horizontal_tab(333,333,22,22,1,1)
+	333 333
+	22  22
+	1   1
 	"""
-	print("1\t1\n22\t22\n333\t333")
+	print(f"{a}\t{b}\n{c}\t{d}\n{e}\t{f}")
