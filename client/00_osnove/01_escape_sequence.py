@@ -1,5 +1,3 @@
-
-
 def U_mad_bro():
 	r"""
 	Izpisi smejkota [U mad bro]: % ¯\_('.")_/¯ %
@@ -28,16 +26,6 @@ def alarm():
 	print("\a")
 
 
-def backspace():
-	"""
-	Na zaslon izpisi znake: ABC\b
-	Preveri če se je znak 'C' izbrisal.
-	>>> backspace()
-	ABC\b
-	"""
-	print("ABC\b")
-
-
 def new_line():
 	"""
 	Na zaslon izpisi znake: ABC\nDEF
@@ -47,16 +35,6 @@ def new_line():
 	DEF
 	"""
 	print("ABC\nDEF")
-
-
-def carriage_return():
-	"""
-	Na zaslon izpisi znake: Hello, world!\rHello!
-	Preveri če se izpisala samo beseda: "Hello!"
-	>>> carriage_return()
-	Hello!
-	"""
-	print("Hello, world!\rHello!")
 
 
 def horizontal_tab(a: int, b: int, c: int, d: int, e: int, f: int):

@@ -16,6 +16,19 @@ def number_overflow():
 	print(2147483648)
 
 
+def deljenje_z_niclo(a: int):
+	"""
+	Vrni stevilko ki jo dobiš če vhodno številko deliš z 0.
+	:param a: Vhodna stevilka.
+	:return: Rezultat.
+	>>> deljenje_z_niclo(123)
+	Traceback (most recent call last):
+	...
+	ZeroDivisionError: division by zero
+	"""
+	return a / 0
+
+
 def format_stevilke(a: int):
 	"""
 	Izpisi vhodno stevilko v binarnem, octalnem, decimalnem, in sestnajstinskem stevilskem sistemu ter v znanstvenem zapisu.
@@ -45,12 +58,21 @@ def zapis_stevilke():
 	return 0b1111011 + 0o173 - 123 - 0x7b + 1.230000e+02
 
 
+def nakljucna_stevilka():
+	"""
+	Poisci nakljucno stevilko za katero velja: -10 <= x <= 21.
+	>>> for i in range(100):
+	...     assert -10 <= nakljucna_stevilka() <= 21
+	"""
+	return random.randint(-10, 21)
 
 
-def tabela_stevil(s1: int, s2: int, s3: int, s4: int, s5: int, s6: int, s7: int, s8: int, s9: int):
+def zaokrozevanje():
 	"""
-	Izpisi stevila v vrsticah. V vsaki vrstici naj se nahaja tocno 3 stevil. Stevila naj bodo ločena s tabulatorjem.
+	Izpisi PI in Eulerjevo stevilo, zavkrozeno na 10-to decimalko vsaki v svoji vrstici.
+	>>> zaokrozevanje()
+	3.1415926536
+	2.7182818285
 	"""
-	print(f'{s1} {s2} {s3}')
-	print(f'{s4} {s5} {s6}')
-	print(f'{s7} {s8} {s9}')
+	print(round(math.pi, 10))
+	print(round(math.e, 10))

@@ -1,27 +1,3 @@
-import math
-import random
-
-
-def nakljucna_stevilka():
-	"""
-	Poisci nakljucno stevilko za katero velja: -10 <= x <= 21.
-	>>> for i in range(100):
-	...     assert -10 <= nakljucna_stevilka() <= 21
-	"""
-	return random.randint(-10, 21)
-
-
-def zaokrozevanje():
-	"""
-	Izpisi PI in Eulerjevo stevilo, zavkrozeno na 10-to decimalko vsaki v svoji vrstici.
-	>>> zaokrozevanje()
-	3.1415926536
-	2.7182818285
-	"""
-	print(round(math.pi, 10))
-	print(round(math.e, 10))
-
-
 def levi_del(a: float) -> int:
 	"""
 	Poisci levi del od decimalke
@@ -73,6 +49,7 @@ def brez_pike(a: float):
 	"""
 	return int("".join([str(b) for b in str(a).replace('.', '')]))
 
+
 def prestavi_piko(a: float):
 	"""
 	Prestavi piko na zacetek decimalke.
@@ -83,4 +60,4 @@ def prestavi_piko(a: float):
 	>>> prestavi_piko(34567.8912)
 	0.345678912
 	"""
-	return a * 10**(-len(str(int(a))))
+	return a * 10 ** (-len(str(int(a))))
