@@ -7,12 +7,6 @@ from src.mapping import Mapping, mapping
 class Python(Language):
 	map: Mapping = mapping.py
 
-	def imports(self, name) -> str:
-		string = []
-		for imports in self.map.imports[name]:
-			string.append(f'import {imports}')
-		return '\n'.join(string)
-
 	def indent(self, offset: int) -> str:
 		return '\t' * offset
 
@@ -38,14 +32,11 @@ class Python(Language):
 			f'{return_indent}pass'
 		])
 
-	def test(self, indent: int, fun_name: str, fun_call_args: str):
-		return f'{self.indent(indent)}{fun_name}({fun_call_args})'
-
 	def main_function(self, body):
 		return '\n'.join([
 			f'if __name__ == "__main__":',
 			f'{body}'
 		])
 
-	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
-		return ''.join(module_docs + imports + functions)
+	def module(self, fileName: List[str], functions: List[str], tests: List[str]):
+		return ''.join([f.strip() for f in functions]) + '\n\n\n' + self.main_function('\n'.join([f'\t{test}' for test in tests]))

@@ -1,13 +1,17 @@
 from abc import ABC, abstractmethod
-from typing import List
+from dataclasses import dataclass
+from typing import List, Dict
+
+
+class Module:
+	def __init__(self):
+		self.fileName: str = ''
+		self.imports: List[str] = []
+		self.docs: str = ''
+		self.functions: Dict[str: str] = {}
 
 
 class Language(ABC):
-
-	@abstractmethod
-	def imports(self, name) -> str:
-		pass
-
 	@abstractmethod
 	def indent(self, offset: int) -> str:
 		pass
@@ -25,12 +29,8 @@ class Language(ABC):
 		pass
 
 	@abstractmethod
-	def test(self, indent: int, fun_name: str, fun_call_args: str):
-		pass
-
-	@abstractmethod
 	def main_function(self, body: str):
 		pass
 
-	def module(self, fileName: List[str], imports: List[str], module_docs: List[str], functions: List[str]):
+	def module(self, fileName: List[str], functions: List[str], tests: List[str]) -> Module:
 		pass

@@ -20,23 +20,13 @@ class Types:
 		return self.__dict__[f'{item}_t']
 
 
-@dataclass
-class Imports:
-	math: List[str] = ('math',)
-	random: List[str] = ('random',)
-	defaults: Tuple[str] = ()
-
-	def __getitem__(self, item):
-		return self.__dict__[item]
-
-
 class Mapping:
-	def __init__(self, types: Types, imports: Imports):
+	def __init__(self, types: Types):
 		self.types = types
-		self.imports = imports
 
 	def __getitem__(self, item):
 		return self.__dict__[item]
+
 
 c_char = Type('char', '')
 c_string = Type('char[]', "")
@@ -51,15 +41,10 @@ cpp_types = Types(str_t=cpp_string, chr_t=c_char)
 java_types = Types(str_t=java_string, chr_t=c_char)
 ts_types = Types(int_t=ts_number, float_t=ts_number, bool_t=ts_bool, str_t=ts_string, chr_t=ts_string)
 
-c_imports = Imports(random=['stdlib', 'time'], defaults=('stdio',))
-cpp_imports = Imports(math=['cmath'], random=['cstdlib', 'ctime'], defaults=('iostream',))
-java_imports = Imports(math=[], random=['java.util.Random'])
-ts_imports = Imports(math=[], random=[])
-
 
 class mapping:
-	py = Mapping(types=Types(), imports=Imports())
-	c = Mapping(types=c_types, imports=c_imports)
-	java = Mapping(types=java_types, imports=java_imports)
-	cpp = Mapping(types=cpp_types, imports=cpp_imports)
-	ts = Mapping(types=ts_types, imports=ts_imports)
+	py = Mapping(types=Types())
+	c = Mapping(types=c_types)
+	java = Mapping(types=java_types)
+	cpp = Mapping(types=cpp_types)
+	ts = Mapping(types=ts_types)

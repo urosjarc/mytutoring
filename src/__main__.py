@@ -15,18 +15,21 @@ def run(sourceDir: Path, binDir: Path):
 	for file in glob.iglob(f"{sourceDir}/**/*.py", recursive=True):
 		innerPath = Path(file).relative_to(sourceDir)
 		fileName = innerPath.stem
-		with open(file) as fstart:
+
+		if fileName in ['__init__']:
+			continue
+
+		with open(file, encoding='utf-8') as fstart:
 			module = ast.parse(fstart.read())
 			for lang in Compiler.lang:
-				endDir = binDir.joinpath(lang, innerPath.parent).resolve()
+				i = 0
+				endDir = binDir.joinpath(lang, innerPath.parent, fileName).resolve()
 				endDir.mkdir(parents=True, exist_ok=True)
-
-				source = compiler.compile(fileName, module, lang)
-
-				with open(endDir.joinpath(f'{fileName}.{lang}'), 'w') as fend:
-					fend.write(source)
-
+				for name, docs, text in compiler.compile(fileName, module, lang):
+					i+=1
+					with open(endDir.joinpath(f'{i:>02}_{name}.{lang}'), 'w', encoding='utf-8') as fend:
+						fend.write(text)
 
 if __name__ == '__main__':
 	run(sourceDir=Path('../client').resolve(),
-	    binDir=Path('../bin').resolve())
+		binDir=Path('../bin').resolve())

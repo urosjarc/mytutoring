@@ -1,3 +1,6 @@
+"""
+This is module docs...
+"""
 def hello_world():
 	"""
 	Na zaslon izpisi: "Hello, world!
