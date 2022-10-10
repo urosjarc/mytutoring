@@ -51,9 +51,10 @@ def tabela_funkcije(x0: float, x1: float, dx: float, a: float, b: float, c: floa
 	"""
 	while True:
 		print(round(x0, 2), round(a * (x0 ** 2) + b * x0 + c, 2), sep='\t')
-		if x0 + dx/2 >= x1:
+		if x0 + dx / 2 >= x1:
 			break
 		x0 += dx
+
 
 def globalni_maximum(x0: float, x1: float, dx: float, a: float, b: float, c: float):
 	"""
@@ -84,6 +85,7 @@ def globalni_maximum(x0: float, x1: float, dx: float, a: float, b: float, c: flo
 
 	return round(maxy, 7)
 
+
 def nicla_funkcije(x0: float, x1: float, dx: float, a: float, b: float, c: float):
 	"""
 	Poisci niclo polinoma med x0 in x1.
@@ -108,7 +110,7 @@ def nicla_funkcije(x0: float, x1: float, dx: float, a: float, b: float, c: float
 			miny = abs(y)
 			x = x0
 		x0 += dx
-		if x0+dx/2 > x1:
+		if x0 + dx / 2 > x1:
 			break
 
 	return round(x, 3)
