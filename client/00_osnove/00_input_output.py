@@ -39,17 +39,20 @@ def argumenti(a: int, b: float, c: chr, d: str):
 
 
 def stdin():
-	"""
+	r"""
 	Uporabnik bo vnesel v terminal celo stevilko, decimalko, crko in besedo.
 	Iz funkcije vrni stavek v katerem uporabi vse vnesene informacije: "Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}.
+	>>> import io, sys
+	>>> sys.stdin = io.StringIO('5\n-1.2\na\nprva beseda')
 	>>> print(stdin())
 	Cela stevilka: 5, Decimalka: -1.2, Crka: a, Beseda: prva beseda.
+	>>> sys.stdin = io.StringIO('-10\n0.12\nb\ndruga beseda')
 	>>> print(stdin())
 	Cela stevilka: -10, Decimalka: 0.12, Crka: b, Beseda: druga beseda.
 	"""
 
-	a = int(input("Vnesi celo stevilko: 5"))
-	b = float(input("vnesi decimalko: -1.2"))
-	c = str(input("Vnesi crko: a"))
-	d = str(input("Vnesi besedo: prva beseda."))
+	a = int(input())
+	b = float(input())
+	c = str(input())
+	d = str(input())
 	return f"Cela stevilka: {a}, Decimalka: {b}, Crka: {c}, Beseda: {d}."
