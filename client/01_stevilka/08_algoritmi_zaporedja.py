@@ -44,16 +44,16 @@ def prastevilo(a: int):
 	return True
 
 
-def ugani_število(a: int):
+def ugani_stevilo(a: int):
 	r"""
 	Uporabnik naj ugiba število dokler ga ne ugane.
-	Na koncu izpiši število poskusov ki jih je uporabnik naredil.
+	Na koncu vrni število poskusov ki jih je uporabnik naredil.
 	>>> import io, sys
 	>>> sys.stdin = io.StringIO('1\n3\n6\n2\n0\n10')
-	>>> ugani_število(10)
+	>>> ugani_stevilo(10)
 	6
 	>>> sys.stdin = io.StringIO('1\n3\n6\n2\n0\n2\n3\n66')
-	>>> ugani_število(66)
+	>>> ugani_stevilo(66)
 	8
 	"""
 	c = 0
@@ -65,29 +65,66 @@ def ugani_število(a: int):
 	return c
 
 
-def stevila_do_nicle():
+def povprecje():
 	r"""
 	Uporabnik vnaša števila dokler ne vnese števila nič.
-	Izpiši...
-	* Število vnesenih števil
-	* Max število
-	* Katero število v vrsti je bilo maksimalno število.
+	Izracunaj povprecje stevil ki jih je uporabnik vnesel.
 	>>> import io, sys
 	>>> sys.stdin = io.StringIO('1\n3\n6\n2\n0\n10\n0')
-	>>> stevila_do_nicle()
-	Stevilo vnosov: 4
-	Maks stevilo: 6
-	Index maks stevilke: 3
+	>>> povprecje()
+	3.0
 	>>> sys.stdin = io.StringIO('1\n3\n6\n200\n0\n2\n3\n66\n0')
-	>>> stevila_do_nicle()
-	Stevilo vnosov: 4
+	>>> povprecje()
+	52.5
+	"""
+	v = []
+	while True:
+		a = int(input())
+		if a == 0:
+			break
+		v.append(a)
+	return round(sum(v) / len(v), 6)
+
+
+def vecje_od_prejsnje():
+	r"""
+	Uporabnik vnasa stevilke dokler ne vnese stevila nic.
+	Izpisi stevilo ce je vecje od prejsnjega stevila.
+	>>> import io, sys
+	>>> sys.stdin = io.StringIO('1\n3\n6\n2\n5\n1\n4\n0\n10\n0')
+	>>> vecje_od_prejsnje()  # doctest: +NORMALIZE_WHITESPACE
+	3 6 5 4
+	>>> sys.stdin = io.StringIO('3\n1\n6\n2\n10\n2\n3\n66\n0')
+	>>> vecje_od_prejsnje()  # doctest: +NORMALIZE_WHITESPACE
+	6 10 3 66
+	"""
+	p = int(input())
+	while True:
+		a = int(input())
+		if a == 0:
+			break
+		elif a > p:
+			print(a, end=' ')
+		p = a
+
+
+def max_stevilo():
+	r"""
+	Uporabnik vnaša števila dokler ne vnese števila nič.
+	Izpiši maksimalno stevilo in na katerem mestu se je pojavila.
+	>>> import io, sys
+	>>> sys.stdin = io.StringIO('1\n3\n6\n2\n0\n10\n0')
+	>>> max_stevilo()
+	Maks stevilo: 6
+	Mesto stevilke: 3
+	>>> sys.stdin = io.StringIO('1\n3\n6\n200\n0\n2\n3\n66\n0')
+	>>> max_stevilo()
 	Maks stevilo: 200
-	Index maks stevilke: 4
+	Mesto stevilke: 4
 	>>> sys.stdin = io.StringIO('-10\n-30\n-6\n-10\n-20\n-30\n-60\n0')
-	>>> stevila_do_nicle()
-	Stevilo vnosov: 7
+	>>> max_stevilo()
 	Maks stevilo: -6
-	Index maks stevilke: 3
+	Mesto stevilke: 3
 	"""
 	c = 1
 	m = int(input())
@@ -98,8 +135,7 @@ def stevila_do_nicle():
 			break
 		if b > m:
 			m = b
-			i = c+1
+			i = c + 1
 		c += 1
-	print(f'Stevilo vnosov: {c}')
 	print(f'Maks stevilo: {m}')
-	print(f'Index maks stevilke: {i}')
+	print(f'Mesto stevilke: {i}')

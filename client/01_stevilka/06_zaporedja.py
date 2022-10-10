@@ -1,42 +1,67 @@
-def naravno_zaporedje(a: int, b: int):
+def naravno_zaporedje_naprej(zacetek: int, konec: int, korak: int):
 	"""
-	Ipisi zaporedje naravnih stevil od prve do druge stevilke.
-	:param a: Prva stevilka.
-	:param b: Druga stevilka.
-	>>> naravno_zaporedje(-5, 5) # doctest: +NORMALIZE_WHITESPACE
+	Ipisi zaporedje naravnih stevil od prve do druge stevilke z poljubnim korakom.
+	:param zacetek: Prva stevilka.
+	:param konec: Druga stevilka.
+	:param korak: Korak zaporedja.
+	>>> naravno_zaporedje_naprej(-5, 5, 1) # doctest: +NORMALIZE_WHITESPACE
 	-5 -4 -3 -2 -1 0 1 2 3 4 5
-	>>> naravno_zaporedje(3, 8) # doctest: +NORMALIZE_WHITESPACE
-	 3 4 5 6 7 8
+	>>> naravno_zaporedje_naprej(3, 8, 2) # doctest: +NORMALIZE_WHITESPACE
+	 3 5 7
 	"""
-	for i in range(a, b + 1):
+	for i in range(zacetek, konec + 1, korak):
 		print(i, end=' ')
 
 
-def obratno_naravno_zaporedje(a: int, b: int):
+def naravno_zaporedje_nazaj(zacetek: int, konec: int, korak: int):
 	"""
-	Ipisi obratno zaporedje naravnih stevil od prve do druge stevilke.
-	:param a: Prva stevilka.
-	:param b: Druga stevilka.
-	>>> obratno_naravno_zaporedje(5, -5) # doctest: +NORMALIZE_WHITESPACE
+	Ipisi obratno zaporedje naravnih stevil od prve do druge stevilke z poljubnim korakom.
+	:param zacetek: Prva stevilka.
+	:param konec: Druga stevilka.
+	:param korak: Korak zaporedja.
+	>>> naravno_zaporedje_nazaj(5, -5, 1) # doctest: +NORMALIZE_WHITESPACE
 	5 4 3 2 1 0 -1 -2 -3 -4 -5
-	>>> obratno_naravno_zaporedje(8, 3) # doctest: +NORMALIZE_WHITESPACE
-	8 7 6 5 4 3
+	>>> naravno_zaporedje_nazaj(8, 2, 2) # doctest: +NORMALIZE_WHITESPACE
+	8 6 4 2
 	"""
-	for i in range(a, b - 1, -1):
+	for i in range(zacetek, konec - 1, -korak):
 		print(i, end=' ')
 
+def exponentno_zaporedje(osnova: int, n: int):
+	"""
+	Izpisi n clenov exponentnega zaporedja z poljubno osnovo.
+	:param osnova: Poljubna cela stevilka.
+	:param n: Stevilo clenov.
+	>>> exponentno_zaporedje(2, 6) # doctest: +NORMALIZE_WHITESPACE
+	1 2 4 8 16 32
+	>>> exponentno_zaporedje(3, 6) # doctest: +NORMALIZE_WHITESPACE
+	1 3 9 27 81 243
+	"""
+	for i in range(n):
+		print(osnova**i, end=" ")
 
-def naravno_zaporedje_s_korakom(a: int, b: int):
+def naravno_zaporedje(zacetek: int, konec: int, korak: int):
 	"""
-	Ipisi zaporedje naravnih stevil od prve do druge stevilke s korakom 3.
-	:param a: Prva stevilka.
-	:param b: Druga stevilka.
-	>>> naravno_zaporedje_s_korakom(-5, 7) # doctest: +NORMALIZE_WHITESPACE
+	Ipisi zaporedje naravnih stevil od zacetne do koncne stevilke s pozitivnim korakom.
+	:param zacetek: Prva stevilka.
+	:param konec: Druga stevilka.
+	:param korak: Korak zaporedja [zmeraj pozitivna stevilka].
+	>>> naravno_zaporedje_s_korakom(-5, 7, 1) # doctest: +NORMALIZE_WHITESPACE
+	-5 -4 -3 -2 -1 0 1 2 3 4 5 6 7
+	>>> naravno_zaporedje_s_korakom(10, 0, 1) # doctest: +NORMALIZE_WHITESPACE
+	10 9 8 7 6 5 4 3 2 1 0
+	>>> naravno_zaporedje_s_korakom(-5, 7, 3) # doctest: +NORMALIZE_WHITESPACE
 	-5 -2 1 4 7
-	>>> naravno_zaporedje_s_korakom(0, 10) # doctest: +NORMALIZE_WHITESPACE
-	0 3 6 9
+	>>> naravno_zaporedje_s_korakom(10, 0, 4) # doctest: +NORMALIZE_WHITESPACE
+	10 6 2
 	"""
-	for i in range(a, b + 1, 3):
+	if zacetek > konec:
+		konec -= 1
+		korak *= -1
+	else:
+		konec += 1
+
+	for i in range(zacetek, konec, korak):
 		print(i, end=' ')
 
 
@@ -85,7 +110,7 @@ def alternirajoce_aritmeticno_zaporedje(a0: int, d: int, n: int):
 		print(((-1) ** i) * (a0 + i * d), end=' ')
 
 
-def fibonacijevo_zaporedje(a: int, b:int, n: int):
+def fibonacijevo_zaporedje(a: int, b: int, n: int):
 	"""
 	Izpisi n clenov fibonacijevega zaporedja.
 	:param a: Zacetni clen.
