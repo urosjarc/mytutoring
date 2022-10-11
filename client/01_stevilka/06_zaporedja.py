@@ -27,6 +27,7 @@ def naravno_zaporedje_nazaj(zacetek: int, konec: int, korak: int):
 	for i in range(zacetek, konec - 1, -korak):
 		print(i, end=' ')
 
+
 def exponentno_zaporedje(osnova: int, n: int):
 	"""
 	Izpisi n clenov exponentnega zaporedja z poljubno osnovo.
@@ -38,7 +39,8 @@ def exponentno_zaporedje(osnova: int, n: int):
 	1 3 9 27 81 243
 	"""
 	for i in range(n):
-		print(osnova**i, end=" ")
+		print(osnova ** i, end=" ")
+
 
 def naravno_zaporedje(zacetek: int, konec: int, korak: int):
 	"""
@@ -46,13 +48,13 @@ def naravno_zaporedje(zacetek: int, konec: int, korak: int):
 	:param zacetek: Prva stevilka.
 	:param konec: Druga stevilka.
 	:param korak: Korak zaporedja [zmeraj pozitivna stevilka].
-	>>> naravno_zaporedje_s_korakom(-5, 7, 1) # doctest: +NORMALIZE_WHITESPACE
+	>>> naravno_zaporedje(-5, 7, 1) # doctest: +NORMALIZE_WHITESPACE
 	-5 -4 -3 -2 -1 0 1 2 3 4 5 6 7
-	>>> naravno_zaporedje_s_korakom(10, 0, 1) # doctest: +NORMALIZE_WHITESPACE
+	>>> naravno_zaporedje(10, 0, 1) # doctest: +NORMALIZE_WHITESPACE
 	10 9 8 7 6 5 4 3 2 1 0
-	>>> naravno_zaporedje_s_korakom(-5, 7, 3) # doctest: +NORMALIZE_WHITESPACE
+	>>> naravno_zaporedje(-5, 7, 3) # doctest: +NORMALIZE_WHITESPACE
 	-5 -2 1 4 7
-	>>> naravno_zaporedje_s_korakom(10, 0, 4) # doctest: +NORMALIZE_WHITESPACE
+	>>> naravno_zaporedje(10, 0, 4) # doctest: +NORMALIZE_WHITESPACE
 	10 6 2
 	"""
 	if zacetek > konec:
@@ -73,7 +75,7 @@ def aritmeticno_zaporedje(a0: int, d: int, n: int):
 	:param n: Stevilo clenov za ispisati.
 	>>> aritmeticno_zaporedje(3, 5, 8)  # doctest: +NORMALIZE_WHITESPACE
 	3 8 13 18 23 28 33 38
-	>>> aritmeticno_zaporedje(-8, -50, 5)
+	>>> aritmeticno_zaporedje(-8, -50, 5)  # doctest: +NORMALIZE_WHITESPACE
 	-8 -58 -108 -158 -208
 	"""
 	for i in range(n):

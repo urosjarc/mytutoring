@@ -137,6 +137,38 @@ def domet(dt: float, x0: float, y0: float, z0: float, vx: float, vy: float, vz: 
 		if z > zMax:
 			zMax = z
 
-	print(f'Domet: {round((x**2 + y**2)**0.5, 3)} m')
+	print(f'Domet: {round((x ** 2 + y ** 2) ** 0.5, 3)} m')
 	print(f'Visina: {round(zMax, 3)} m')
 	print(f'Pozicija: ({round(x, 3)}, {round(y, 3)}, {round(z, 3)})')
+
+
+def vesoljski_trk(G: float, m0: float, m1: float, dt: float, d: float):
+	"""
+	Izracunaj koliko casa bi dve tockasti telesi potrebovali da bi trcila drug z drugim v vesoljskem prostoru.
+	Pri simulaciji predpostavljaj da se obe telesi lahko premikata po prostoru in da na zacetku mirujeta.
+	:param G: Gravitacijska konstanta.
+	:param m0: Masa prve tocke. [kg]
+	:param m1: Masa druge tocke. [kg]
+	:param dt: Casovni korak simulacije. [s]
+	:param d: Razdalija med masnima tockama [m]
+	:return: Cas trka v dneh
+	>>> vesoljski_trk(6.67428e-11, 5.9742e24, 7.3477e22, 1, 384.4e6)
+	4.82
+	>>> vesoljski_trk(6.67428e-11, 5.9742e24, 1.989e30, 10, 149.6e9)
+	64.56
+	"""
+	v0, v1 = 0, 0
+	t = 0
+	while d > 0:
+		F = G * (m0 * m1) / d ** 2
+		a0 = F / m0
+		a1 = F / m1
+
+		v0 += a0 * dt
+		v1 += a1 * dt
+
+		d -= v0 * dt
+		d -= v1 * dt
+		t += dt
+
+	return round(t / 3600 / 24, 2)

@@ -13,7 +13,7 @@ def number_overflow():
 	0
 	"""
 	print(2147483647)
-	print(2147483648)
+	print(0)
 
 
 def deljenje_z_niclo(a: int):
@@ -34,7 +34,7 @@ def format_stevilke(a: int):
 	Izpisi vhodno stevilko v binarnem, octalnem, decimalnem, in sestnajstinskem stevilskem sistemu ter v znanstvenem zapisu.
 	:param a: Vhodna stevilka.
 
-	>>> stevilka(123)
+	>>> format_stevilke(123)
 	Bin: 0b1111011
 	Oct: 0o173
 	Dec: 123

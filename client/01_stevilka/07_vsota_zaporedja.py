@@ -33,6 +33,7 @@ def vsota_uporabniskih_stevilk(n: int):
 	"""
 	return sum([int(input()) for i in range(n)])
 
+
 def vsota_do_nic():
 	r"""
 	Uporabnik vnasa nakljucna stevila dokler ne vnese stevilo 0.

@@ -3,9 +3,9 @@ def levi_del(a: float) -> int:
 	Poisci levi del od decimalke
 	:param a: Decimalka.
 	:return: Leva stran od pike decimalke.
-	>>> float_int(123.45)
+	>>> levi_del(123.45)
 	123
-	>>> float_int(54.321)
+	>>> levi_del(54.321)
 	54
 	"""
 	return int(a)

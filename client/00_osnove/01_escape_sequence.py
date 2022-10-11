@@ -41,11 +41,11 @@ def horizontal_tab(a: int, b: int, c: int, d: int, e: int, f: int):
 	"""
 	Na zaslon izpisi tabelo iz parametrov funkcije.
 	V vsaki vrstici izpisi po dve stevili.
-	>>> horizontal_tab(1,1,22,22,333,333)
+	>>> horizontal_tab(1,1,22,22,333,333)  # doctest: +NORMALIZE_WHITESPACE
 	1   1
 	22  22
 	333 333
-	>>> horizontal_tab(333,333,22,22,1,1)
+	>>> horizontal_tab(333,333,22,22,1,1) # doctest: +NORMALIZE_WHITESPACE
 	333 333
 	22  22
 	1   1

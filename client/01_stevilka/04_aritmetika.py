@@ -23,7 +23,7 @@ def minus(a: int, b: int):
 	:return: Razlika stevil.
 	>>> minus(3, 23)
 	-20
-	>>> vsota(8,3)
+	>>> minus(8,3)
 	5
 	"""
 	return a - b
