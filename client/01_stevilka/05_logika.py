@@ -308,7 +308,7 @@ def logicna_tabela(a: bool, b: bool, c: bool):
 		return not c
 
 
-def avanturisticna_igra(polnoleten: bool, avto: bool, bencin: bool, osnovna: bool, starsi):
+def avanturisticna_igra(polnoleten: bool, avto: bool, bencin: bool, osnovna: bool, starsi: str):
 	"""
 	Ugotovi kdo te bo odpeljal domov.
 	:param polnoleten:

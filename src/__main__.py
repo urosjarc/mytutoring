@@ -26,6 +26,7 @@ def run(sourceDir: Path, binDir: Path):
 				endDir = binDir.joinpath(lang, innerPath.parent, fileName).resolve()
 				endDir.mkdir(parents=True, exist_ok=True)
 				for name, docs, text in compiler.compile(fileName, module, lang):
+					print(name)
 					i+=1
 					with open(endDir.joinpath(f'{i:>02}_{name}.{lang}'), 'w', encoding='utf-8') as fend:
 						fend.write(text)

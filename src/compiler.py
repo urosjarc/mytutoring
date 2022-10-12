@@ -24,7 +24,11 @@ class Compiler:
 	def args(self, args: ast.arguments):
 		string = []
 		for arg in args.args:
-			string.append(self.lang.args(typ=arg.annotation.id, name=arg.arg))
+			if isinstance(arg.annotation, ast.Subscript):
+				id = arg.annotation.value.id
+			else:
+				id = arg.annotation.id
+			string.append(self.lang.args(typ=id, name=arg.arg))
 		return ', '.join(string)
 
 	def function(self, fun: ast.FunctionDef):
@@ -66,7 +70,7 @@ class Compiler:
 				stdout.append(line)
 			else:
 				string.append(f'{nx}{line}')
-		return tests, stdout, self.lang.docs(indent, f'\n{self.lang.indent(indent)}'.join(string))
+		return tests, stdout, f'\t"""{docs}"""'# self.lang.docs(indent, f'\n{self.lang.indent(indent)}'.join(string))
 
 	def compile(self, fileName: str, module: ast.Module, ext: str) -> str:
 		self.lang = Compiler.lang[ext]
