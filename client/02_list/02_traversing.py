@@ -118,25 +118,134 @@ def proti_koncem(spisek: List[int]):
 		print(spisek[i], end=' ')
 		print(spisek[-i - 1], end=' ')
 
-def
 
-"""	
+def pari_naprej(spisek: List[int]):
+	"""
+	Izpisi pare stevil, ki se drzijo skupaj od zacetka proti koncu.
+	:param spisek: Spisek stevil.
+	>>> pari_naprej([i for i in range(0, 12)])
+	0 1
+	1 2
+	2 3
+	3 4
+	4 5
+	5 6
+	6 7
+	7 8
+	8 9
+	9 10
+	10 11
+	>>> pari_naprej([i for i in range(16, -10, -2)])
+	16 14
+	14 12
+	12 10
+	10 8
+	8 6
+	6 4
+	4 2
+	2 0
+	0 -2
+	-2 -4
+	-4 -6
+	-6 -8
+	"""
+	for i in range(0, len(spisek) - 1):
+		print(spisek[i], spisek[i + 1])
 
-## Iz sredine Ustvari spisek stevilk.
-Izpisi elemente od sredine spiska proti koncev izmenjajoče.
 
-## Pari
-Ustvari spisek stevilk.
-Izpisi...
-* Pare števil v spisku, ki se držijo skupaj od začetka proti koncu.
-* Pare števil v spisku, ki se držijo skupaj od konca proti začetku.
+def pari_nazaj(spisek: List[int]):
+	"""
+	Izpisi pare stevil, ki se drzijo skupaj od konca proti zacetku.
+	:param spisek: Spisek stevil.
+	>>> pari_nazaj([i for i in range(0, 12)])
+	11 10
+	10 9
+	9 8
+	8 7
+	7 6
+	6 5
+	5 4
+	4 3
+	3 2
+	2 1
+	1 0
+	>>> pari_nazaj([i for i in range(16, -9, -2)])
+	-8 -6
+	-6 -4
+	-4 -2
+	-2 0
+	0 2
+	2 4
+	4 6
+	6 8
+	8 10
+	10 12
+	12 14
+	14 16
+	"""
+	for i in range(len(spisek) - 1, 0, -1):
+		print(spisek[i], spisek[i - 1])
 
-## Trojčki
-Ustvari spisek številk.
-Izpisi...
-* Trojčke števil v spisku, ki se držijo skupaj od začetka proti koncu.
-* Trojčke števil v spisku, ki se držijo skupaj od konca proti začetku.
 
-## Unikatni elementi
-Uporabnik vnaša števila za spisek. V spisek vnašaj samo unikatna števila dokler ni spisek poln.
-"""
+def trojcki_naprej(spisek: List[int]):
+	"""
+	Izpisi trojcke stevil, ki se drzijo skupaj od zacetka proti koncu.
+	:param spisek: Spisek stevil.
+	>>> trojcki_naprej([i for i in range(0, 12)])
+	0 1 2
+	1 2 3
+	2 3 4
+	3 4 5
+	4 5 6
+	5 6 7
+	6 7 8
+	7 8 9
+	8 9 10
+	9 10 11
+	>>> trojcki_naprej([i for i in range(16, -10, -2)])
+	16 14 12
+	14 12 10
+	12 10 8
+	10 8 6
+	8 6 4
+	6 4 2
+	4 2 0
+	2 0 -2
+	0 -2 -4
+	-2 -4 -6
+	-4 -6 -8
+	"""
+	for i in range(0, len(spisek) - 2):
+		print(spisek[i], spisek[i + 1], spisek[i + 2])
+
+
+def trojcki_nazaj(spisek: List[int]):
+	"""
+	Izpisi pare stevil, ki se drzijo skupaj od konca proti zacetku.
+	:param spisek: Spisek stevil.
+	>>> trojcki_nazaj([i for i in range(0, 12)])
+	11 10 9
+	10 9 8
+	9 8 7
+	8 7 6
+	7 6 5
+	6 5 4
+	5 4 3
+	4 3 2
+	3 2 1
+	2 1 0
+	>>> trojcki_nazaj([i for i in range(16, -9, -2)])
+	-8 -6 -4
+	-6 -4 -2
+	-4 -2 0
+	-2 0 2
+	0 2 4
+	2 4 6
+	4 6 8
+	6 8 10
+	8 10 12
+	10 12 14
+	12 14 16
+	"""
+	for i in range(len(spisek) - 1, 1, -1):
+		print(spisek[i], spisek[i - 1], spisek[i - 2])
