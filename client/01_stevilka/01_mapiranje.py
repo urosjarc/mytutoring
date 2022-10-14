@@ -8,7 +8,7 @@ def str_int(a: str) -> float:
 	>>> str_int('54.321')
 	54.321
 	"""
-	return float(a)
+	return int(a)
 
 
 def int_float(a: int):
