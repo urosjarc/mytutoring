@@ -1,3 +1,4 @@
+import math
 from typing import List
 
 
@@ -78,44 +79,108 @@ def velikost_vektorja(vektor: List[int]):
 	>>> velikost_vektorja([1,-2,3, 1, 9])
 	9.797959
 	"""
-	vektor = [ele**2 for ele in vektor]
-	return round(sum(vektor)**0.5, 6)
+	vektor = [ele ** 2 for ele in vektor]
+	return round(sum(vektor) ** 0.5, 6)
 
 
-
-def oddaljenost_vektorja():
+def oddaljenost_vektorja(v1: List[int], v2: List[int]):
 	"""
-	Ustvari dva spiska ki predstavljata vektorja v 8 dimenzijskem prostoru.
-	Izračunaj za koliko sta oddaljena drug od drugega.
+	Izracunaj za koliko sta vektorja oddaljena drug od drugega.
+	:param v1: Prvi vektor.
+	:param v2: Drugi vektor.
+	:return: Oddaljenost vektorja.
+	>>> oddaljenost_vektorja([1, 2, 3], [3, 2, 1, 2, 3, 8])
+	[4, 4, 4, 2, 3, 8]
+	>>> oddaljenost_vektorja([3, 2, 1, 2, 3, 8], [-1, -2, 3])
+	[2, 0, 4, 2, 3, 8]
 	"""
-	pass
+	if len(v1) > len(v2):
+		for i in range(len(v2)):
+			v1[i] += v2[i]
+		return v1
+	else:
+		for i in range(len(v1)):
+			v2[i] += v1[i]
+		return v2
 
 
-def normalizacija_vektorja():
+def normalizacija_vektorja(v: List[int]):
 	"""
-	Ustvari spisek ki predstavlja vektor v 8 dimenzijskem prostoru.
-	Izpiši normaliziran vektor in njegovo dolžino.
+	Ustvari normaliziran vektor.
+	:param v: Vektor
+	:return: Normaliziran vektor.
+	>>> normalizacija_vektorja([1,2,3])
+	[0.2673, 0.5345, 0.8018]
+	>>> normalizacija_vektorja([-1,2,-3, 5, 9])
+	[-0.0913, 0.1826, -0.2739, 0.4564, 0.8216]
 	"""
-	pass
+	s = [ele ** 2 for ele in v]
+	s = sum(s) ** 0.5
+	return [round(ele / s, 4) for ele in v]
 
 
-def skraliranje_vektorja():
+def mapiranje_vektorja(v: List[int]):
 	"""
-	Mapiraj vektor tako da bo največji element 1 najmanjši pa 0.
+	Skaliraj vektor tako da bo max vrednost vektorja 1 in min element 0!
+	:param v: Vektor
+	:return: Skaliran vektor.
+	>>> mapiranje_vektorja([1,2,3,4])
+	[0.0, 0.3333, 0.6667, 1.0]
+	>>> mapiranje_vektorja([-1,2,-3, 5, 9])
+	[0.1667, 0.4167, 0.0, 0.6667, 1.0]
 	"""
-	pass
+	m = min(v)
+	M = max(v)
+	k = 1 / (M - m)
+	return [round(ele * k - k * m, 4) for ele in v]
 
 
-def kot_vektorja():
+def kot_vektorja(v1: List[int], v2: List[int]):
 	"""
-	Ustvari dva spiska ki predstavljata vektorja v 8 dimenzijskem prostoru. Izračunaj kot med njima.
+	Izracunaj kot med vektorjema.
+	:param v1: Prvi vektor.
+	:param v2: Drugi vektor.
+	:return: Kot med vektorjema.
+	>>> kot_vektorja([1,2,3], [1,2,3,4])
+	75.03678
+	>>> kot_vektorja([1,-2,3, 8, 1], [1,2,3,4])
+	82.66699
 	"""
-	pass
+	if len(v1) > len(v2):
+		for i in range(len(v2)):
+			v2[i] *= v1[i]
+		up = sum(v2)
+	else:
+		for i in range(len(v1)):
+			v1[i] *= v2[i]
+		up = sum(v1)
+
+	abs_v1 = [ele ** 2 for ele in v1]
+	abs_v2 = [ele ** 2 for ele in v2]
+	abs_v1 = sum(abs_v1) ** 0.5
+	abs_v2 = sum(abs_v2) ** 0.5
+
+	return round(math.degrees(math.acos(up / (abs_v1 * abs_v2))), 5)
 
 
-def Rotacija_vektorja():
+def rotacija_vektorja_2D(v1: List[int], deg: float):
 	"""
-	Rotiraj vektor okoli drugega vektorja.
-	:return:
+	Rotiraj vektor okoli drugega vektorja za specificni kot.
+	:param v1: Prvi vektor.
+	:param os: Os rotacije.
+	:param deg: Kot rotacije v stopinjah.
+	:return: Rotiran vektor okoli osi.
+	>>> rotacija_vektorja_2D([1,2], 180)
+	[-1.0, 2.0]
+	>>> rotacija_vektorja_2D([1,2], 30)
+	[-0.134, -1.2321]
+	>>> rotacija_vektorja_2D([2,-1], -30)
+	[1.2321, -0.134]
+	>>> rotacija_vektorja_2D([2,-1], -180)
+	[-2.0, -1.0]
 	"""
-	pass
+	rad = math.radians(deg)
+	return [
+		round(v1[0]*math.cos(rad) - v1[1]*math.sin(rad), 4),
+		round(v1[0]*math.sin(rad) - v1[1]*math.cos(rad), 4)
+	]
